@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">KinAssist</string>
+    <string name="ask_help">Ask for Help</string>
+    <string name="senior_mode">Senior Mode</string>
+    <string name="helper_mode">Helper Mode</string>
+    <string name="connecting">Connecting...</string>
+    <string name="connected">Connected</string>
+    <string name="disconnected">Disconnected</string>
+</resources>

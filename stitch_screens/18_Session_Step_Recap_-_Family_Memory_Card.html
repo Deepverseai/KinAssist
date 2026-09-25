@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-secondary-container": "#ff9f8b", "on-tertiary-container": "#005035", "on-primary-fixed": "#241a00", "primary-container": "#d4af37", "on-background": "#e2e2e8", "on-error-container": "#ffdad6", "surface-variant": "#333539", "surface-container-lowest": "#0c0e12", "on-primary-fixed-variant": "#574500", "tertiary-fixed-dim": "#4edea3", "error-container": "#93000a", "on-secondary": "#621002", "secondary-fixed": "#ffdad3", "background": "#111317", "surface-bright": "#37393e", "on-secondary-fixed": "#3e0500", "secondary-fixed-dim": "#ffb4a4", "surface-container": "#1e2024", "primary-fixed": "#ffe088", "outline": "#99907c", "tertiary": "#58e7aa", "surface-container-high": "#282a2e", "on-secondary-fixed-variant": "#822714", "outline-variant": "#4d4635", "surface": "#111317", "on-primary": "#3c2f00", "surface-container-low": "#1a1c20", "primary-fixed-dim": "#e9c349", "on-tertiary-fixed-variant": "#005236", "on-surface": "#e2e2e8", "inverse-surface": "#e2e2e8", "on-primary-container": "#554300", "secondary": "#ffb4a4", "tertiary-fixed": "#6ffbbe", "on-surface-variant": "#d0c5af", "on-error": "#690005", "tertiary-container": "#33ca90", "on-tertiary-fixed": "#002113", "surface-dim": "#111317", "surface-container-highest": "#333539", "on-tertiary": "#003824", "surface-tint": "#e9c349", "primary": "#f2ca50", "error": "#ffb4ab", "inverse-on-surface": "#2f3035", "secondary-container": "#852916", "inverse-primary": "#735c00" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-sm": "0.75rem", "margin-mobile": "1.25rem", "gutter": "1.5rem", "space-lg": "2rem", "space-xs": "0.5rem", "space-xl": "3rem", "space-md": "1.25rem", "margin": "2rem", "gutter-mobile": "1rem" }, "fontFamily": { "headline-sm": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"], "headline-lg-mobile": ["Plus Jakarta Sans"], "label-md": ["Plus Jakarta Sans"], "headline-xl": ["Plus Jakarta Sans"], "label-sm": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"], "body-xl": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"], "headline-xl-mobile": ["Plus Jakarta Sans"], "label-lg": ["Plus Jakarta Sans"] }, "fontSize": { "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }], "headline-lg": ["32px", { "lineHeight": "42px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "headline-lg-mobile": ["26px", { "lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "label-md": ["15px", { "lineHeight": "20px", "letterSpacing": "0.04em", "fontWeight": "600" }], "headline-xl": ["40px", { "lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "label-sm": ["13px", { "lineHeight": "18px", "letterSpacing": "0.05em", "fontWeight": "500" }], "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }], "body-xl": ["22px", { "lineHeight": "34px", "fontWeight": "400" }], "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }], "headline-xl-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "label-lg": ["18px", { "lineHeight": "26px", "letterSpacing": "0.02em", "fontWeight": "600" }] } } } }</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface font-body-md text-body-md text-on-surface flex flex-col min-h-screen"><header class="fixed top-0 inset-x-0 z-50 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe"><div class="h-20 px-margin-mobile flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0"><img alt="KinAssist official brand logo recreated from user screenshot: a stylized split shield/cross icon with warm orange-gold upper segments and flowing gradient cyan-blue lower wave segments, paired with the bold italicized wordmark 'KINASSIST'.. Brand logo. - Primary color: #d4af37
+- Font: plusJakartaSans
+- Mode: dark
+- Roundness: rounded-md
+" class="h-8 w-auto object-contain flex-shrink-0" src="https://lh3.googleusercontent.com/aida/AEtjO1UxF2FqtTYtXvx69BSTGDbIMt5ipgVXc81gTZs-bOMfUHpETrok5yCW3gMDUMtJIl5FhfTQLUGksVY0hsb13CG1z0LsXkJF-XXSp-bjA8xHGjuiNbTGX9qBhCjRGyEZV6ecyRb9--87mRGq8uoJQVCy1jJvYw8gtsKE-vQpYKC0_FaY4GzxTJfqTdLgxJhVAsLKXE1wfpWSPYdoM-t79EiZCoTErrtMbnjdplNElAyTyXNogrf7KxcP6Hsg"/><div class="flex flex-col min-w-0"><span class="font-label-sm text-label-sm text-primary uppercase tracking-wider">KinAssist</span><h1 class="font-headline-sm text-headline-sm text-on-surface truncate">Memory Cards</h1></div></div><div class="flex items-center gap-space-xs"><button aria-label="Caregiver Profile" class="w-11 h-11 flex items-center justify-center rounded-full bg-surface-container-high/60 transition-colors" type="button"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1VqAGeSmrRt25rc7hr7ogOrP2NOA6RlT91F3__ygoXGMLnsad_cGrtvpYoB7qw1UUtJBxty49cpUGsTeraN8pJHmpukR2E1fqbaBAieDgYATmmcxmjJzh7Yq6tguRFi6Cw4gdf_D7otJUhz-PnXVYbRmfGCbAzXor3kA3xSRL3Ffj2xKItLCrWJfeDm-HGIq4kFz24_2Q4C9WgnfEMvlwKT7u6fzZ8rSqWWzRp0ywSf1rjMwGN7SQnQ4o7I"/></button></div></div></header><main class="flex-1 flex flex-col relative w-full pt-20 pb-24 bg-surface"><div class="flex flex-col w-full px-margin-mobile pb-space-xl gap-space-md">
+<!-- Section 1: Success Banner & Header -->
+<div class="flex flex-col gap-space-xs pt-space-xs">
+<div class="inline-flex items-center gap-2 self-start px-3 py-1.5 rounded-full bg-tertiary-container/20 text-tertiary">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span class="font-label-sm text-label-sm font-semibold tracking-wide">Problem Solved • 2m 14s Session</span>
+</div>
+<div class="flex flex-col">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Family Memory Card</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Step-by-step reminder automatically saved for Mom</p>
+</div>
+</div>
+<!-- Section 2: Active Memory Card (Hero Container) -->
+<div class="flex flex-col bg-surface-container rounded-xl shadow-lg p-space-md gap-space-md">
+<!-- Card Meta & Caregiver Presence Badge -->
+<div class="flex items-center justify-between gap-space-sm bg-surface-container-high/70 p-3 rounded-lg">
+<div class="flex items-center gap-space-xs min-w-0">
+<div class="relative flex-shrink-0">
+<img class="w-12 h-12 rounded-full object-cover" data-alt="A warm, reassuring headshot of a 30-year-old South Asian caregiver named Rahul smiling gently, photographed with soft cinematic portrait lighting, modern dark aesthetic with amber tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAik3AeNqeqIhsgks0o6HoFmFLYlnABoUh3_m4vzKzq3KjOTUd4A-OBEyOv9Mo0fEEi-6pw1zEBmPUS6Wx1V21DPDR6X9Vc09bvoJipUX6n8tF6gs1nWSx3Goy0OqJoKvG9OzrYybq8vYFcB-WSu6GrA9suFwVQQfYZskmWUCrhoc-lqZs_YXRFlEzo1pzcUfdwpFl0eTesVDwKVGYjdwdacxMzG6HH3V5ChZA85qhkEHt93MMKmdd7nQ"/>
+<span class="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full bg-tertiary border-2 border-surface-container"></span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface truncate">Guided by Rahul</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant truncate">Today at 11:32 AM</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary text-[28px] flex-shrink-0">bookmark_added</span>
+</div>
+<!-- Solution Title -->
+<div class="flex flex-col gap-1">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-wider">Quick Reference #104</span>
+<h3 class="font-headline-md text-headline-md text-on-surface leading-snug">How to Hear Incoming Phone Calls Again</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Turning off silent "Do Not Disturb" in 3 easy finger steps.</p>
+</div>
+<!-- 3-Step Illustrated Flow -->
+<div class="flex flex-col gap-space-sm">
+<!-- Step 1 -->
+<div class="flex gap-space-sm p-space-sm bg-surface-container-low rounded-lg items-start">
+<div class="flex-shrink-0 w-11 h-11 rounded-full bg-primary/15 text-primary flex items-center justify-center font-headline-sm text-headline-sm">
+          1
+        </div>
+<div class="flex-1 flex flex-col gap-1.5 min-w-0">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Swipe Down from Screen Top</span>
+<span class="material-symbols-outlined text-primary-fixed-dim text-[20px]">swipe_down</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Slide one finger gently from the very top black edge down into the middle.</p>
+<!-- Visual cue preview -->
+<div class="mt-1 flex items-center gap-2 px-3 py-2 rounded-md bg-surface-container-high/60">
+<div class="w-6 h-8 rounded border border-outline-variant flex flex-col items-center pt-1">
+<span class="w-2 h-0.5 bg-outline rounded-full"></span>
+<span class="material-symbols-outlined text-[14px] text-primary mt-0.5">arrow_downward</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface">Opens the quick Control Window</span>
+</div>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="flex gap-space-sm p-space-sm bg-surface-container-low rounded-lg items-start">
+<div class="flex-shrink-0 w-11 h-11 rounded-full bg-primary/15 text-primary flex items-center justify-center font-headline-sm text-headline-sm">
+          2
+        </div>
+<div class="flex-1 flex flex-col gap-1.5 min-w-0">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Tap the Moon / Minus Circle</span>
+<span class="material-symbols-outlined text-secondary text-[20px]">do_not_disturb_on</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Tap the purple or white circle labeled <strong class="text-on-surface">"Do Not Disturb"</strong> so the bright color goes away.</p>
+<!-- State comparison replica -->
+<div class="mt-1 flex items-center justify-between px-3 py-2 rounded-md bg-surface-container-high/60">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-surface-bright flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">do_not_disturb_on</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant line-through">Silent (Purple)</span>
+</div>
+<span class="material-symbols-outlined text-tertiary text-[18px]">arrow_forward</span>
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-surface-container-lowest flex items-center justify-center text-outline">
+<span class="material-symbols-outlined text-[16px]">do_not_disturb_off</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary font-medium">Off (Dark Grey)</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="flex gap-space-sm p-space-sm bg-surface-container-low rounded-lg items-start">
+<div class="flex-shrink-0 w-11 h-11 rounded-full bg-tertiary-container/30 text-tertiary flex items-center justify-center font-headline-sm text-headline-sm">
+          3
+        </div>
+<div class="flex-1 flex flex-col gap-1.5 min-w-0">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface font-semibold">All Done! Phone Rings Freely</span>
+<span class="material-symbols-outlined text-tertiary text-[20px]">notifications_active</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Your phone speaker will now ring loud and bright whenever Rahul or family calls.</p>
+<div class="mt-1 flex items-center gap-2 px-3 py-2 rounded-md bg-tertiary-container/15 text-tertiary">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+<span class="font-label-sm text-label-sm font-semibold">Ringer restored to 100% volume</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Caregiver Voice Note Micro-Player -->
+<div class="flex flex-col p-space-sm rounded-lg bg-surface-container-high/50 gap-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-[20px]">record_voice_over</span>
+<span class="font-label-sm text-label-sm font-semibold uppercase tracking-wider">Rahul's 12s Voice Note</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant" id="voice-timer">0:12</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<button aria-label="Play Rahul's voice reminder" class="w-12 h-12 flex-shrink-0 rounded-full bg-primary text-on-primary flex items-center justify-center shadow-md active:scale-95 transition-transform" id="voice-play-btn" type="button">
+<span class="material-symbols-outlined text-[26px]" id="voice-play-icon">play_arrow</span>
+</button>
+<!-- Dynamic Simulated Waveform Bars -->
+<div class="flex-1 flex items-center gap-1 h-8 px-1" id="waveform">
+<div class="w-1.5 bg-primary rounded-full h-3"></div>
+<div class="w-1.5 bg-primary rounded-full h-5"></div>
+<div class="w-1.5 bg-primary rounded-full h-7"></div>
+<div class="w-1.5 bg-primary rounded-full h-4"></div>
+<div class="w-1.5 bg-primary rounded-full h-6"></div>
+<div class="w-1.5 bg-primary/40 rounded-full h-8"></div>
+<div class="w-1.5 bg-primary/40 rounded-full h-5"></div>
+<div class="w-1.5 bg-primary/40 rounded-full h-3"></div>
+<div class="w-1.5 bg-primary/40 rounded-full h-7"></div>
+<div class="w-1.5 bg-primary/40 rounded-full h-4"></div>
+<div class="w-1.5 bg-primary/40 rounded-full h-6"></div>
+<div class="w-1.5 bg-primary/40 rounded-full h-3"></div>
+<div class="w-1.5 bg-primary/40 rounded-full h-2"></div>
+</div>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant italic">"Mom, remember it's just the circle with the little line. Don't worry, you did great!"</p>
+</div>
+</div>
+<!-- Section 3: High-Affordance Senior Primary Feedback Buttons -->
+<div class="flex flex-col gap-space-sm mt-1">
+<!-- Big Primary Acknowledgement Button (64dp Touch Target) -->
+<button class="w-full min-h-[64px] px-space-md py-4 rounded-xl bg-primary text-on-primary font-headline-sm text-headline-sm flex items-center justify-center gap-space-xs shadow-lg active:scale-[0.98] transition-transform" id="ack-btn" type="button">
+<span class="material-symbols-outlined text-[28px]">thumb_up</span>
+<span>"I Understand Now, Thanks Rahul!"</span>
+</button>
+<!-- Safe Practice Simulator Trigger Button -->
+<button class="w-full min-h-[56px] px-space-md py-3 rounded-xl bg-surface-container-high text-on-surface font-label-lg text-label-lg flex items-center justify-center gap-space-xs hover:bg-surface-bright active:scale-[0.98] transition-all" type="button">
+<span class="material-symbols-outlined text-primary text-[24px]">model_training</span>
+<span>Try in Safe Practice Mode</span>
+</button>
+</div>
+<!-- Section 4: Mom's Solved Memory Archive -->
+<div class="flex flex-col gap-space-sm mt-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[22px]">auto_stories</span>
+<h4 class="font-headline-sm text-headline-sm text-on-surface">Mom's Memory Archive</h4>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">3 cards saved</span>
+</div>
+<!-- Archive List -->
+<div class="flex flex-col gap-2.5">
+<!-- Past Card 1 -->
+<div class="flex items-center justify-between p-space-sm bg-surface-container rounded-lg active:bg-surface-container-high transition-colors cursor-pointer">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center text-tertiary flex-shrink-0">
+<span class="material-symbols-outlined text-[26px]">photo_library</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface truncate">Finding Photos Sent on WhatsApp</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Solved 3 days ago • 2 steps</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-[22px]">chevron_right</span>
+</div>
+<!-- Past Card 2 -->
+<div class="flex items-center justify-between p-space-sm bg-surface-container rounded-lg active:bg-surface-container-high transition-colors cursor-pointer">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined text-[26px]">wifi</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface truncate">Reconnecting to Living Room Wi-Fi</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Solved Sep 18 • 3 steps</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-[22px]">chevron_right</span>
+</div>
+<!-- Past Card 3 -->
+<div class="flex items-center justify-between p-space-sm bg-surface-container rounded-lg active:bg-surface-container-high transition-colors cursor-pointer">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center text-secondary flex-shrink-0">
+<span class="material-symbols-outlined text-[26px]">format_size</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface truncate">Making Phone Text Bigger &amp; Clearer</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Solved Sep 10 • 1 step</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-[22px]">chevron_right</span>
+</div>
+</div>
+</div>
+<!-- Reassurance Footer Note -->
+<div class="flex items-center justify-center gap-2 p-3 text-center bg-surface-container-lowest rounded-lg">
+<span class="material-symbols-outlined text-primary text-[18px]">favorite</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Always accessible without needing mobile internet or logins</span>
+</div>
+</div>
+<script>
+  (function() {
+    const playBtn = document.getElementById('voice-play-btn');
+    const playIcon = document.getElementById('voice-play-icon');
+    const waveform = document.getElementById('waveform');
+    const timer = document.getElementById('voice-timer');
+    const ackBtn = document.getElementById('ack-btn');
+    
+    let isPlaying = false;
+    let playInterval;
+    let secondsLeft = 12;
+
+    if (playBtn) {
+      playBtn.addEventListener('click', function() {
+        isPlaying = !isPlaying;
+        if (isPlaying) {
+          playIcon.textContent = 'pause';
+          secondsLeft = 12;
+          playInterval = setInterval(function() {
+            secondsLeft--;
+            if (secondsLeft >= 0) {
+              timer.textContent = '0:' + (secondsLeft < 10 ? '0' : '') + secondsLeft;
+              // Dance waveform bars
+              const bars = waveform.children;
+              for (let i = 0; i < bars.length; i++) {
+                const randomHeight = Math.floor(Math.random() * 24 + 6);
+                bars[i].style.height = randomHeight + 'px';
+                bars[i].classList.remove('bg-primary/40');
+                bars[i].classList.add('bg-primary');
+              }
+            } else {
+              clearInterval(playInterval);
+              isPlaying = false;
+              playIcon.textContent = 'replay';
+              timer.textContent = '0:12';
+            }
+          }, 1000);
+        } else {
+          clearInterval(playInterval);
+          playIcon.textContent = 'play_arrow';
+        }
+      });
+    }
+
+    if (ackBtn) {
+      ackBtn.addEventListener('click', function() {
+        ackBtn.innerHTML = '<span class="material-symbols-outlined text-[28px] text-on-primary">done_all</span><span>Sent to Rahul! ❤️</span>';
+        ackBtn.classList.remove('bg-primary');
+        ackBtn.classList.add('bg-tertiary-container', 'text-on-tertiary-container');
+        setTimeout(function() {
+          ackBtn.innerHTML = '<span class="material-symbols-outlined text-[28px]">thumb_up</span><span>"I Understand Now, Thanks Rahul!"</span>';
+          ackBtn.classList.add('bg-primary', 'text-on-primary');
+          ackBtn.classList.remove('bg-tertiary-container', 'text-on-tertiary-container');
+        }, 3000);
+      });
+    }
+  })();
+</script></main><nav class="fixed bottom-0 inset-x-0 z-50 pb-safe bg-surface/85 backdrop-blur-xl shadow-[0_-4px_24px_rgba(0,0,0,0.4)]" data-active-classes="text-primary font-label-md"><div class="flex justify-around items-center h-20 px-gutter-mobile"><a class="flex flex-col items-center justify-center gap-1 min-w-[64px] min-h-[48px] px-2 py-1 text-on-surface-variant hover:text-on-surface transition-colors font-label-sm text-label-sm" data-path="senior-mode" href="#"><span class="material-symbols-outlined text-[26px]">elderly</span><span class="leading-none">Senior</span></a><a class="flex flex-col items-center justify-center gap-1 min-w-[64px] min-h-[48px] px-2 py-1 text-on-surface-variant hover:text-on-surface transition-colors font-label-sm text-label-sm" data-path="helper-mode" href="#"><span class="material-symbols-outlined text-[26px]">support_agent</span><span class="leading-none">Helper</span></a><a aria-current="page" class="flex flex-col items-center justify-center gap-1 min-w-[64px] min-h-[48px] px-2 py-1 transition-colors text-primary font-label-md" data-path="memory-cards" href="#"><span class="material-symbols-outlined text-[26px]">photo_album</span><span class="leading-none">Memories</span></a><a class="flex flex-col items-center justify-center gap-1 min-w-[64px] min-h-[48px] px-2 py-1 text-on-surface-variant hover:text-on-surface transition-colors font-label-sm text-label-sm" data-path="settings" href="#"><span class="material-symbols-outlined text-[26px]">tune</span><span class="leading-none">Settings</span></a></div></nav></body></html>

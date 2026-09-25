@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_blank" name="shell-type"/><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-secondary-container": "#ff9f8b", "on-tertiary-container": "#005035", "on-primary-fixed": "#241a00", "primary-container": "#d4af37", "on-background": "#e2e2e8", "on-error-container": "#ffdad6", "surface-variant": "#333539", "surface-container-lowest": "#0c0e12", "on-primary-fixed-variant": "#574500", "tertiary-fixed-dim": "#4edea3", "error-container": "#93000a", "on-secondary": "#621002", "secondary-fixed": "#ffdad3", "background": "#111317", "surface-bright": "#37393e", "on-secondary-fixed": "#3e0500", "secondary-fixed-dim": "#ffb4a4", "surface-container": "#1e2024", "primary-fixed": "#ffe088", "outline": "#99907c", "tertiary": "#58e7aa", "surface-container-high": "#282a2e", "on-secondary-fixed-variant": "#822714", "outline-variant": "#4d4635", "surface": "#111317", "on-primary": "#3c2f00", "surface-container-low": "#1a1c20", "primary-fixed-dim": "#e9c349", "on-tertiary-fixed-variant": "#005236", "on-surface": "#e2e2e8", "inverse-surface": "#e2e2e8", "on-primary-container": "#554300", "secondary": "#ffb4a4", "tertiary-fixed": "#6ffbbe", "on-surface-variant": "#d0c5af", "on-error": "#690005", "tertiary-container": "#33ca90", "on-tertiary-fixed": "#002113", "surface-dim": "#111317", "surface-container-highest": "#333539", "on-tertiary": "#003824", "surface-tint": "#e9c349", "primary": "#f2ca50", "error": "#ffb4ab", "inverse-on-surface": "#2f3035", "secondary-container": "#852916", "inverse-primary": "#735c00" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-sm": "0.75rem", "margin-mobile": "1.25rem", "gutter": "1.5rem", "space-lg": "2rem", "space-xs": "0.5rem", "space-xl": "3rem", "space-md": "1.25rem", "margin": "2rem", "gutter-mobile": "1rem" }, "fontFamily": { "headline-sm": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"], "headline-lg-mobile": ["Plus Jakarta Sans"], "label-md": ["Plus Jakarta Sans"], "headline-xl": ["Plus Jakarta Sans"], "label-sm": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"], "body-xl": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"], "headline-xl-mobile": ["Plus Jakarta Sans"], "label-lg": ["Plus Jakarta Sans"] }, "fontSize": { "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }], "headline-lg": ["32px", { "lineHeight": "42px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "headline-lg-mobile": ["26px", { "lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "label-md": ["15px", { "lineHeight": "20px", "letterSpacing": "0.04em", "fontWeight": "600" }], "headline-xl": ["40px", { "lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "label-sm": ["13px", { "lineHeight": "18px", "letterSpacing": "0.05em", "fontWeight": "500" }], "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }], "body-xl": ["22px", { "lineHeight": "34px", "fontWeight": "400" }], "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }], "headline-xl-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "label-lg": ["18px", { "lineHeight": "26px", "letterSpacing": "0.02em", "fontWeight": "600" }] } } } }</script></head><body class="bg-surface font-body-md text-body-md text-on-surface flex flex-col min-h-screen pt-safe pb-safe"><main class="flex-1 flex flex-col relative w-full bg-surface"><div class="flex flex-col w-full text-on-surface select-none pb-8 px-4 space-y-4">
+<!-- Brand Header & Urgent Status Pill -->
+<div class="flex items-center justify-between pt-2">
+<div class="flex items-center space-x-2">
+<img alt="KinAssist Logo" class="w-8 h-8 rounded-lg object-contain shadow-md" src="https://lh3.googleusercontent.com/aida/AEtjO1UxF2FqtTYtXvx69BSTGDbIMt5ipgVXc81gTZs-bOMfUHpETrok5yCW3gMDUMtJIl5FhfTQLUGksVY0hsb13CG1z0LsXkJF-XXSp-bjA8xHGjuiNbTGX9qBhCjRGyEZV6ecyRb9--87mRGq8uoJQVCy1jJvYw8gtsKE-vQpYKC0_FaY4GzxTJfqTdLgxJhVAsLKXE1wfpWSPYdoM-t79EiZCoTErrtMbnjdplNElAyTyXNogrf7KxcP6Hsg"/>
+<span class="font-headline-sm text-label-md tracking-wider text-on-surface uppercase">KinAssist</span>
+</div>
+<div class="flex items-center space-x-2 bg-secondary-container/80 text-on-secondary-container px-3 py-1.5 rounded-full shadow-lg backdrop-blur-md">
+<span class="relative flex h-2.5 w-2.5">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-secondary"></span>
+</span>
+<span class="font-label-sm text-label-sm font-semibold tracking-wide">HIGH PRIORITY SOS</span>
+</div>
+</div>
+<!-- Signal Banner -->
+<div class="flex items-center justify-center space-x-2 py-1 bg-surface-container-low rounded-lg px-3">
+<span class="material-symbols-outlined text-tertiary text-base">sensors</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">KinAssist Direct Relay • Living Room Hub (Chime Active)</span>
+</div>
+<!-- Caller Profile Centerpiece -->
+<div class="relative flex flex-col items-center justify-center py-4 my-2">
+<!-- Pulse Rings (Living Aura) -->
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<div class="w-48 h-48 rounded-full bg-secondary/15 animate-ping opacity-70"></div>
+<div class="absolute w-60 h-60 rounded-full bg-secondary/10 animate-pulse"></div>
+<div class="absolute w-40 h-40 rounded-full bg-primary/20 blur-xl"></div>
+</div>
+<!-- Senior Avatar with Glow -->
+<div class="relative z-10 w-28 h-28 rounded-full p-1 bg-surface-container-high shadow-2xl flex items-center justify-center">
+<div class="relative w-full h-full rounded-full overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Dignified warm close-up portrait of Eleanor, a 74-year-old grandmother with kind eyes, soft silver-white hair, wearing an elegant neutral knit cardigan in a softly lit Scandinavian living room with warm amber tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKSEaJ78E7dA7Odg6uWBU-M7G3l4wLLU23iD0fjr6usEoMFsFNZWbOdZAdkYSyvt3ztyJRiqSVRBVcfxouEuFd-37C3_KTwZCeLDinhR1ugjxe3tZdawfhjBZrKKQ9IlE6S40anKLxFshPNpYbvvMJkeevdYNa4Dg8tCPL6_wmMHxtIThsY-I70nCbsQAGLvc08W_sAD-gEbTFq-4PkQ3aVBclvdq_S_my4AX_egLVl9cHn_Ky0YQzTg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest/70 via-transparent to-transparent"></div>
+</div>
+<!-- Heartbeat / Active Calling Badge -->
+<div class="absolute -bottom-1 -right-1 bg-secondary text-on-secondary p-1.5 rounded-full shadow-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">ring_volume</span>
+</div>
+</div>
+<!-- Caller Title and Metadata -->
+<div class="relative z-10 mt-3 text-center">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface font-bold tracking-tight">
+        Mom <span class="font-headline-sm text-headline-sm text-on-surface-variant font-normal">(Eleanor Vance)</span>
+</h1>
+<p class="font-body-md text-body-md text-secondary mt-0.5 font-medium flex items-center justify-center space-x-1">
+<span>Tapped 1-Tap SOS Button</span>
+<span>•</span>
+<span class="text-tertiary">Audio Ringing (00:08)</span>
+</p>
+</div>
+<!-- Context Note Pill -->
+<div class="relative z-10 mt-3 max-w-xs bg-surface-container px-3.5 py-2 rounded-xl text-center shadow-md">
+<div class="flex items-center justify-center space-x-1.5 text-on-surface">
+<span class="material-symbols-outlined text-primary text-sm">chat_bubble</span>
+<span class="font-label-sm text-label-sm font-semibold">Immediate Assistance Request</span>
+</div>
+<p class="font-body-md text-label-md text-on-surface-variant mt-1 italic leading-tight">
+        “Can't find the photo Marcus sent on WhatsApp”
+      </p>
+</div>
+</div>
+<!-- Real-Time Device Telemetry Card -->
+<div class="bg-surface-container rounded-xl p-3.5 shadow-lg space-y-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-primary text-base">perm_device_information</span>
+<span class="font-label-md text-label-md font-semibold text-on-surface">Eleanor's iPad Mini</span>
+</div>
+<span class="font-label-sm text-label-sm text-tertiary font-medium flex items-center space-x-1">
+<span class="inline-block w-2 h-2 rounded-full bg-tertiary"></span>
+<span>Synced Just Now</span>
+</span>
+</div>
+<div class="grid grid-cols-2 gap-2">
+<!-- Battery Telemetry -->
+<div class="bg-surface-container-low p-2.5 rounded-lg flex items-center space-x-2.5">
+<div class="bg-tertiary-container/30 text-tertiary p-2 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">battery_charging_80</span>
+</div>
+<div class="min-w-0">
+<p class="font-label-sm text-label-sm text-on-surface-variant">Battery</p>
+<p class="font-label-md text-label-md text-on-surface font-semibold truncate">84% • Good</p>
+</div>
+</div>
+<!-- Latency & Connection -->
+<div class="bg-surface-container-low p-2.5 rounded-lg flex items-center space-x-2.5">
+<div class="bg-primary/20 text-primary p-2 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-lg">speed</span>
+</div>
+<div class="min-w-0">
+<p class="font-label-sm text-label-sm text-on-surface-variant">P2P Latency</p>
+<p class="font-label-md text-label-md text-on-surface font-semibold truncate">38ms • Ultra Low</p>
+</div>
+</div>
+</div>
+<!-- Volume Override Alert Status -->
+<div class="bg-surface-container-high p-2.5 rounded-lg flex items-start space-x-2.5">
+<span class="material-symbols-outlined text-secondary text-lg mt-0.5">volume_off</span>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<p class="font-label-sm text-label-sm text-on-surface font-medium">Silent Mode Active (0%)</p>
+<span class="bg-primary-container text-on-primary-container text-label-sm font-bold px-1.5 py-0.5 rounded">Auto-Bypassed</span>
+</div>
+<p class="font-body-md text-label-sm text-on-surface-variant mt-0.5 leading-tight">
+          System automatically elevated incoming ringer to 85% for emergency safety compliance.
+        </p>
+</div>
+</div>
+</div>
+<!-- Primary Interactive Dispatch Actions -->
+<div class="space-y-2.5 pt-2">
+<!-- Big Emerald Primary Connect Button (Live Canvas Assist) -->
+<button class="w-full bg-tertiary text-on-tertiary rounded-xl p-4 flex items-center justify-between shadow-2xl active:scale-[0.98] transition-transform duration-150 min-h-[64px]" id="acceptLiveBtn">
+<div class="flex items-center space-x-3 text-left">
+<div class="bg-on-tertiary/15 text-on-tertiary p-2 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">screen_share</span>
+</div>
+<div>
+<span class="font-headline-sm text-headline-sm block font-bold leading-tight">Accept &amp; Launch Canvas</span>
+<span class="font-label-sm text-label-sm text-on-tertiary/80 block mt-0.5">Stream Eleanor's screen &amp; activate pointer</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-2xl font-bold">arrow_forward</span>
+</button>
+<!-- Secondary Quick Voice Intercom -->
+<div class="grid grid-cols-2 gap-2">
+<button class="bg-surface-container-high text-on-surface hover:bg-surface-variant active:scale-[0.97] transition-all rounded-xl p-3 flex flex-col items-center justify-center min-h-[60px] shadow-md" id="voiceOnlyBtn">
+<div class="flex items-center space-x-1.5">
+<span class="material-symbols-outlined text-primary text-xl">phone_in_talk</span>
+<span class="font-label-md text-label-md font-semibold">Voice Only</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-0.5">Quick Intercom</span>
+</button>
+<button class="bg-surface-container-high text-on-surface hover:bg-surface-variant active:scale-[0.97] transition-all rounded-xl p-3 flex flex-col items-center justify-center min-h-[60px] shadow-md" id="cameraAssistBtn">
+<div class="flex items-center space-x-1.5">
+<span class="material-symbols-outlined text-secondary-fixed-dim text-xl">videocam</span>
+<span class="font-label-md text-label-md font-semibold">Two-Way Video</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-0.5">See Face-to-Face</span>
+</button>
+</div>
+<!-- Family Escalation / Forward Bar -->
+<div class="pt-1">
+<div class="bg-surface-container-low rounded-xl p-3 flex items-center justify-between">
+<div class="flex items-center space-x-2.5 min-w-0">
+<div class="relative w-9 h-9 rounded-full overflow-hidden bg-surface-variant flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Candid circular profile headshot of Marcus, a warm 38-year-old Scandinavian man with short brown hair and a friendly expression, wearing a navy crewneck." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGVFGrTV7uhXUYE5KdyOvZ3m6Kx1EoQYmHm71HywgqTiO-g2-Gl6VhuAKFx3QVff5p5AjvmtlHob18QmI-bkFKWGqmk6aBk5SqidZWckgiIXGmp7pNdC6qAk57jSABzP9I-4pHUjfwKElzISOYQfmJ2ljaBqlddUrCSZRCDLAfEiisDFqYHoRWBBfAbJsdVNG3falu5WQNOR3sAVRT4x7qaoI7KJ2gt9dTScDNr8JIClLOk1_qeouJqQ"/>
+<span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-tertiary rounded-full"></span>
+</div>
+<div class="min-w-0">
+<p class="font-label-sm text-label-sm font-semibold text-on-surface truncate">Brother Marcus is Online</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant truncate">Co-caregiver • Within 5 miles</p>
+</div>
+</div>
+<button class="bg-surface-variant text-on-surface hover:bg-surface-bright active:scale-95 transition px-3 py-2 rounded-lg font-label-sm text-label-sm font-semibold flex items-center space-x-1 shrink-0 ml-2" id="forwardBtn">
+<span>Forward</span>
+<span class="material-symbols-outlined text-base">forward</span>
+</button>
+</div>
+</div>
+<!-- Gentle Decline Option -->
+<div class="flex justify-center pt-1">
+<button class="text-on-surface-variant hover:text-error active:opacity-75 transition font-label-md text-label-md flex items-center space-x-1.5 py-1 px-4" id="busyDeclineBtn">
+<span class="material-symbols-outlined text-base">call_end</span>
+<span>Cannot Answer • Send Automated Reassurance Audio</span>
+</button>
+</div>
+</div>
+</div>
+<script>
+  (function() {
+    const acceptLiveBtn = document.getElementById('acceptLiveBtn');
+    const voiceOnlyBtn = document.getElementById('voiceOnlyBtn');
+    const cameraAssistBtn = document.getElementById('cameraAssistBtn');
+    const forwardBtn = document.getElementById('forwardBtn');
+    const busyDeclineBtn = document.getElementById('busyDeclineBtn');
+
+    if (acceptLiveBtn) {
+      acceptLiveBtn.addEventListener('click', () => {
+        acceptLiveBtn.classList.add('opacity-90');
+        acceptLiveBtn.innerHTML = `
+          <div class="flex items-center space-x-3 mx-auto py-1">
+            <span class="material-symbols-outlined animate-spin text-2xl text-on-tertiary">sync</span>
+            <span class="font-headline-sm text-headline-sm font-bold text-on-tertiary">Launching Remote Pointer...</span>
+          </div>
+        `;
+      });
+    }
+
+    if (voiceOnlyBtn) {
+      voiceOnlyBtn.addEventListener('click', () => {
+        voiceOnlyBtn.classList.add('bg-tertiary', 'text-on-tertiary');
+        voiceOnlyBtn.innerHTML = `
+          <span class="material-symbols-outlined text-xl animate-pulse">mic</span>
+          <span class="font-label-md text-label-md font-bold mt-0.5">Connecting Voice...</span>
+        `;
+      });
+    }
+
+    if (cameraAssistBtn) {
+      cameraAssistBtn.addEventListener('click', () => {
+        cameraAssistBtn.classList.add('bg-secondary-container', 'text-on-secondary-container');
+        cameraAssistBtn.innerHTML = `
+          <span class="material-symbols-outlined text-xl animate-pulse">videocam</span>
+          <span class="font-label-md text-label-md font-bold mt-0.5">Starting Video...</span>
+        `;
+      });
+    }
+
+    if (forwardBtn) {
+      forwardBtn.addEventListener('click', () => {
+        forwardBtn.disabled = true;
+        forwardBtn.innerHTML = `
+          <span class="text-tertiary font-label-sm">Forwarded</span>
+          <span class="material-symbols-outlined text-tertiary text-base">check</span>
+        `;
+      });
+    }
+
+    if (busyDeclineBtn) {
+      busyDeclineBtn.addEventListener('click', () => {
+        busyDeclineBtn.innerHTML = `
+          <span class="material-symbols-outlined text-tertiary text-base">done_all</span>
+          <span class="text-tertiary">Reassurance sent: "Sarah is calling back in 2 mins"</span>
+        `;
+      });
+    }
+  })();
+</script></main></body></html>

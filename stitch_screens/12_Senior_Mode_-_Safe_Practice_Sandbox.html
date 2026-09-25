@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_stack" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100vw;margin:0;padding:0;background-color:#111317;color:#e2e2e8;}body{overscroll-behavior:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-secondary-container": "#ff9f8b", "on-tertiary-container": "#005035", "on-error-container": "#ffdad6", "outline": "#99907c", "error": "#ffb4ab", "secondary-fixed-dim": "#ffb4a4", "tertiary-fixed-dim": "#4edea3", "on-background": "#e2e2e8", "error-container": "#93000a", "on-tertiary": "#003824", "background": "#111317", "primary": "#f2ca50", "on-primary-container": "#554300", "on-primary-fixed": "#241a00", "surface-container-highest": "#333539", "surface-container-high": "#282a2e", "surface-bright": "#37393e", "tertiary-fixed": "#6ffbbe", "inverse-surface": "#e2e2e8", "on-surface": "#e2e2e8", "surface-container-lowest": "#0c0e12", "primary-fixed-dim": "#e9c349", "on-secondary": "#621002", "surface-tint": "#e9c349", "on-primary-fixed-variant": "#574500", "on-secondary-fixed-variant": "#822714", "on-primary": "#3c2f00", "on-secondary-fixed": "#3e0500", "secondary-fixed": "#ffdad3", "on-error": "#690005", "surface-dim": "#111317", "secondary": "#ffb4a4", "on-tertiary-fixed-variant": "#005236", "surface": "#111317", "on-surface-variant": "#d0c5af", "inverse-primary": "#735c00", "inverse-on-surface": "#2f3035", "primary-container": "#d4af37", "secondary-container": "#852916", "on-tertiary-fixed": "#002113", "surface-container-low": "#1a1c20", "tertiary-container": "#33ca90", "surface-variant": "#333539", "primary-fixed": "#ffe088", "tertiary": "#58e7aa", "surface-container": "#1e2024", "outline-variant": "#4d4635" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "margin": "2rem", "margin-mobile": "1.25rem", "space-lg": "2rem", "gutter": "1.5rem", "space-xs": "0.5rem", "gutter-mobile": "1rem", "space-md": "1.25rem", "space-xl": "3rem", "space-sm": "0.75rem" }, "fontFamily": { "label-sm": ["Plus Jakarta Sans"], "label-lg": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"], "body-xl": ["Plus Jakarta Sans"], "headline-xl-mobile": ["Plus Jakarta Sans"], "headline-xl": ["Plus Jakarta Sans"], "label-md": ["Plus Jakarta Sans"], "headline-lg-mobile": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "headline-sm": ["Plus Jakarta Sans"] }, "fontSize": { "label-sm": ["13px", { "lineHeight": "18px", "letterSpacing": "0.05em", "fontWeight": "500" }], "label-lg": ["18px", { "lineHeight": "26px", "letterSpacing": "0.02em", "fontWeight": "600" }], "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }], "body-xl": ["22px", { "lineHeight": "34px", "fontWeight": "400" }], "headline-xl-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "headline-xl": ["40px", { "lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "label-md": ["15px", { "lineHeight": "20px", "letterSpacing": "0.04em", "fontWeight": "600" }], "headline-lg-mobile": ["26px", { "lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "headline-lg": ["32px", { "lineHeight": "42px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }], "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }] } } } };</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface font-body-md text-on-surface flex flex-col min-h-screen overflow-x-hidden"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/85 backdrop-blur-xl shadow-[0_4px_24px_rgba(0,0,0,0.5)]"><div class="h-16 px-gutter-mobile flex items-center justify-between gap-space-xs"><div class="flex items-center gap-space-xs min-w-0"><button aria-label="Go back" class="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl bg-surface-container-high/60 text-on-surface hover:bg-surface-container-highest transition-colors active:scale-95" onclick="history.back()"><span class="material-symbols-outlined text-[24px]">arrow_back</span></button><img alt="KinAssist official brand logo recreated from user screenshot: a stylized split shield/cross icon with warm orange-gold upper segments and flowing gradient cyan-blue lower wave segments, paired with the bold italicized wordmark 'KINASSIST'.. Brand logo. - Primary color: #d4af37
+- Font: plusJakartaSans
+- Mode: dark
+- Roundness: rounded-md
+" class="h-8 w-auto object-contain shrink-0" src="https://lh3.googleusercontent.com/aida/AEtjO1UxF2FqtTYtXvx69BSTGDbIMt5ipgVXc81gTZs-bOMfUHpETrok5yCW3gMDUMtJIl5FhfTQLUGksVY0hsb13CG1z0LsXkJF-XXSp-bjA8xHGjuiNbTGX9qBhCjRGyEZV6ecyRb9--87mRGq8uoJQVCy1jJvYw8gtsKE-vQpYKC0_FaY4GzxTJfqTdLgxJhVAsLKXE1wfpWSPYdoM-t79EiZCoTErrtMbnjdplNElAyTyXNogrf7KxcP6Hsg"/><h1 class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight truncate pl-1">Safe Practice Sandbox</h1></div><div class="flex items-center gap-space-xs shrink-0"><div class="w-2.5 h-2.5 rounded-full bg-tertiary animate-pulse"></div><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-2 ring-surface-container-highest" src="https://lh3.googleusercontent.com/aida/AEtjO1VqAGeSmrRt25rc7hr7ogOrP2NOA6RlT91F3__ygoXGMLnsad_cGrtvpYoB7qw1UUtJBxty49cpUGsTeraN8pJHmpukR2E1fqbaBAieDgYATmmcxmjJzh7Yq6tguRFi6Cw4gdf_D7otJUhz-PnXVYbRmfGCbAzXor3kA3xSRL3Ffj2xKItLCrWJfeDm-HGIq4kFz24_2Q4C9WgnfEMvlwKT7u6fzZ8rSqWWzRp0ywSf1rjMwGN7SQnQ4o7I"/></div></div></header><main class="flex flex-col relative w-full pt-16 pb-safe bg-surface min-h-screen"><div class="flex flex-col w-full px-margin-mobile py-space-sm space-y-space-md">
+<!-- Reassurance & Context Banner -->
+<div class="flex flex-col space-y-space-xs">
+<div class="inline-flex items-center gap-space-xs px-space-sm py-1.5 rounded-full bg-surface-container-high w-fit">
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary shadow-[0_0_8px_rgba(88,231,170,0.6)] animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-tertiary">Safe Mode Active • 100% Risk Free</span>
+</div>
+<div class="pt-1">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface tracking-tight">Safe Practice Sandbox</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-0.5">No real settings will change. Practice freely at your own calm pace.</p>
+</div>
+</div>
+<!-- Active Task Header Card -->
+<div class="flex flex-col p-space-md rounded-xl bg-surface-container-low shadow-sm space-y-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-primary">Active Exercise</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container font-label-sm text-label-sm text-on-surface-variant">Step 1 of 1</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Turning Off "Do Not Disturb"</h3>
+<div class="flex items-center gap-space-xs pt-1">
+<img class="w-6 h-6 rounded-full object-cover" data-alt="Portrait of Rahul, a caring adult son smiling warmly in soft ambient room lighting, wearing a navy sweater, realistic photo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC57eaafprE7Obaslls0pLJRm2LYHxDoILCgS1hcSmHWR4njqUgs6dw2lnWlkdxyC5QrIHiHQj0oY7oJKspJsCYF12u93QhH1dEClFrLs6EOuq-_d7VO46kn0KZOCnWUkMmsIfWbXM1ylH7rvBOuaX_K-5yqT-5y1DTVfGornCm6enZ6_Zbpe8sG6EI6edjBrCNZW34RzswI22yMrdaWc--2_qlln7t-D-MpNco2fHDLE-f2QCOSdRJVw"/>
+<p class="font-body-md text-body-md text-on-surface-variant">Guided by Rahul’s saved memory card</p>
+</div>
+</div>
+<!-- Interactive Simulated Device Sandbox Screen -->
+<div class="flex flex-col rounded-xl bg-surface-container p-space-md relative overflow-hidden shadow-xl space-y-space-md">
+<!-- Sandbox Frame Chrome -->
+<div class="flex items-center justify-between px-space-xs py-1 rounded-lg bg-surface-container-lowest text-on-surface-variant">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-tertiary">verified_user</span>
+<span class="font-label-sm text-label-sm text-on-surface">Simulated Android Panel</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">signal_cellular_4_bar</span>
+<span class="material-symbols-outlined text-[16px]">battery_full</span>
+<span class="font-label-sm text-label-sm">10:42 AM</span>
+</div>
+</div>
+<!-- Son Rahul's Gentle Coaching Speech Bubble -->
+<div class="flex items-start gap-space-sm bg-surface-container-high p-space-sm rounded-xl">
+<img class="w-12 h-12 rounded-full object-cover shrink-0" data-alt="Warm close-up avatar portrait of an encouraging adult son smiling gently in natural sunlight, modern domestic kitchen background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAL0XaKDGR5MdWgi3x_ug69d06xV_uJJdFOWjH1Hi84W4x3LiE_iYLmYasZ5fp0H1fWg1FnqIJoqUjRGgGGVYxCdV2ZqpyUBVC91woDyUjsOx7oLxqlvHIS2LFQqXfWs8l4DN5QzmLP3j1Skv_jMiG_NAh_wIxwlWQZ5h1QyJQFNDxL-l_3ePcXad9j637ExPmaUneKVGsw6bB7T_0vGcy5eMqKcs_xc__r-je5eIhoj_3dvnNgVIURuw"/>
+<div class="flex flex-col space-y-0.5">
+<span class="font-label-md text-label-md text-primary">Rahul says:</span>
+<p class="font-body-md text-body-md text-on-surface leading-snug">"Tap the purple button right here! See how easy it is to make your phone ring normally again."</p>
+</div>
+</div>
+<!-- Simulated Phone Quick Settings Grid -->
+<div class="grid grid-cols-2 gap-space-sm relative pt-space-xs">
+<!-- INACTIVE DUMMY TILE: Wi-Fi -->
+<div class="flex items-center gap-space-xs p-space-sm rounded-xl bg-surface-container-low opacity-60">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-surface text-[22px]">wifi</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface truncate">Home Wi-Fi</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Connected</span>
+</div>
+</div>
+<!-- INACTIVE DUMMY TILE: Bluetooth -->
+<div class="flex items-center gap-space-xs p-space-sm rounded-xl bg-surface-container-low opacity-60">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-surface text-[22px]">bluetooth</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface truncate">Bluetooth</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Off</span>
+</div>
+</div>
+<!-- TARGET INTERACTIVE TILE: Do Not Disturb -->
+<button class="relative col-span-2 min-h-[72px] p-space-md rounded-xl flex items-center justify-between transition-all duration-300 active:scale-[0.98] bg-secondary-container text-on-secondary-container shadow-md" id="dndSimulatorBtn" onclick="toggleDNDPractice()">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-full flex items-center justify-center bg-secondary text-on-secondary shadow-sm" id="dndIconBox">
+<span class="material-symbols-outlined text-[28px]" id="dndIcon" style="font-variation-settings: 'FILL' 1;">do_not_disturb_on</span>
+</div>
+<div class="flex flex-col text-left">
+<span class="font-headline-sm text-headline-sm font-semibold" id="dndTitle">Do Not Disturb</span>
+<span class="font-label-md text-label-md opacity-90" id="dndStatus">Currently ON • Calls are silenced</span>
+</div>
+</div>
+<div class="w-14 h-8 rounded-full bg-secondary flex items-center px-1 transition-colors" id="dndSwitchTrack">
+<div class="w-6 h-6 rounded-full bg-on-secondary shadow-md transform translate-x-6 transition-transform" id="dndSwitchThumb"></div>
+</div>
+<!-- Glowing Ripple Pointer Assist pointing directly at button -->
+<div class="absolute -top-3 -right-2 pointer-events-none flex flex-col items-center" id="tutorialPointer">
+<div class="relative flex items-center justify-center">
+<span class="absolute w-12 h-12 rounded-full bg-tertiary/30 animate-ping"></span>
+<span class="relative w-8 h-8 rounded-full bg-tertiary flex items-center justify-center shadow-[0_0_16px_rgba(88,231,170,0.8)] text-on-tertiary">
+<span class="material-symbols-outlined text-[20px] font-bold">touch_app</span>
+</span>
+</div>
+<div class="mt-1 px-2 py-0.5 rounded-full bg-surface-container-lowest/90 backdrop-blur shadow-sm">
+<span class="font-label-sm text-label-sm text-tertiary font-bold">Tap here</span>
+</div>
+</div>
+</button>
+<!-- INACTIVE DUMMY TILE: Flashlight -->
+<div class="flex items-center gap-space-xs p-space-sm rounded-xl bg-surface-container-low opacity-60">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-surface text-[22px]">flashlight_on</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface truncate">Torch</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Off</span>
+</div>
+</div>
+<!-- INACTIVE DUMMY TILE: Airplane Mode -->
+<div class="flex items-center gap-space-xs p-space-sm rounded-xl bg-surface-container-low opacity-60">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-surface text-[22px]">airplanemode_inactive</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface truncate">Airplane Mode</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Off</span>
+</div>
+</div>
+</div>
+<!-- Success Celebration State (Revealed upon completing simulation) -->
+<div class="hidden flex-col items-center text-center p-space-md rounded-xl bg-surface-container-highest shadow-xl space-y-space-xs" id="successCard">
+<div class="w-12 h-12 rounded-full bg-tertiary-container flex items-center justify-center text-on-tertiary-container">
+<span class="material-symbols-outlined text-[32px]">check_circle</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface">Wonderful job, Mom!</h4>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-xs">You turned off Do Not Disturb in just 2 seconds. Incoming family calls will now ring out loud!</p>
+<!-- Audio Waveform Celebration Note -->
+<div class="w-full mt-space-xs p-space-sm rounded-lg bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[24px]">graphic_eq</span>
+<span class="font-label-md text-label-md text-on-surface">Rahul’s Praise Note</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary">0:04</span>
+</div>
+</div>
+</div>
+<!-- Simulation Control Actions -->
+<div class="flex flex-col gap-space-xs">
+<!-- Rahul's Voice Note Tip Player -->
+<button class="min-h-[56px] w-full px-space-md py-space-sm rounded-xl bg-surface-container-high text-on-surface flex items-center justify-between active:scale-[0.99] transition-transform" id="voiceNoteBtn" onclick="toggleVoiceNote()">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-on-primary" id="playIconCircle">
+<span class="material-symbols-outlined text-[24px]" id="playIcon">play_arrow</span>
+</div>
+<div class="flex flex-col text-left">
+<span class="font-label-md text-label-md text-on-surface">Listen to Rahul’s Voice Tip</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant" id="voiceTime">Tap to listen • 0:12 duration</span>
+</div>
+</div>
+<!-- Decorative miniature audio waveform -->
+<div class="flex items-end gap-1 h-5">
+<div class="w-1 h-2 rounded-full bg-outline"></div>
+<div class="w-1 h-5 rounded-full bg-primary"></div>
+<div class="w-1 h-3 rounded-full bg-outline"></div>
+<div class="w-1 h-4 rounded-full bg-primary"></div>
+<div class="w-1 h-2 rounded-full bg-outline"></div>
+</div>
+</button>
+<!-- Reset Simulation Exercise Button -->
+<button class="min-h-[56px] w-full px-space-md py-space-sm rounded-xl bg-surface-container text-on-surface flex items-center justify-center gap-space-xs hover:bg-surface-container-high transition-colors active:scale-[0.99]" onclick="resetPractice()">
+<span class="material-symbols-outlined text-[22px] text-on-surface-variant">refresh</span>
+<span class="font-label-lg text-label-lg text-on-surface">Reset Exercise &amp; Try Again</span>
+</button>
+</div>
+<!-- Additional Practice Library Section -->
+<div class="flex flex-col space-y-space-xs pt-space-xs">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Other Practice Lessons</h3>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Zero Risk</span>
+</div>
+<!-- Lesson 1 -->
+<div class="flex items-center justify-between p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors cursor-pointer">
+<div class="flex items-center gap-space-sm">
+<div class="w-12 h-12 rounded-xl bg-surface-container-highest flex items-center justify-center text-tertiary shrink-0">
+<span class="material-symbols-outlined text-[28px]">photo_library</span>
+</div>
+<div class="flex flex-col min-w-0">
+<h4 class="font-label-lg text-label-lg text-on-surface truncate">Find WhatsApp Photos</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant">2 quick steps • Practice viewing albums</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline">arrow_forward_ios</span>
+</div>
+<!-- Lesson 2 -->
+<div class="flex items-center justify-between p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors cursor-pointer">
+<div class="flex items-center gap-space-sm">
+<div class="w-12 h-12 rounded-xl bg-surface-container-highest flex items-center justify-center text-secondary shrink-0">
+<span class="material-symbols-outlined text-[28px]">phone_in_talk</span>
+</div>
+<div class="flex flex-col min-w-0">
+<h4 class="font-label-lg text-label-lg text-on-surface truncate">Answering Calls (Swipe Up)</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Practice smooth slide motion</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline">arrow_forward_ios</span>
+</div>
+<!-- Lesson 3 -->
+<div class="flex items-center justify-between p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors cursor-pointer">
+<div class="flex items-center gap-space-sm">
+<div class="w-12 h-12 rounded-xl bg-surface-container-highest flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[28px]">format_size</span>
+</div>
+<div class="flex flex-col min-w-0">
+<h4 class="font-label-lg text-label-lg text-on-surface truncate">Make Font Text Bigger</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Adjust slider to comfortable vision</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline">arrow_forward_ios</span>
+</div>
+</div>
+<!-- Primary Bottom Exit Action -->
+<div class="pt-space-xs pb-space-lg">
+<button class="w-full min-h-[64px] rounded-xl bg-primary text-on-primary font-label-lg text-label-lg font-bold flex items-center justify-center gap-space-xs shadow-lg active:scale-[0.98] transition-transform" onclick="history.back()">
+<span class="material-symbols-outlined text-[26px]">sentiment_satisfied</span>
+<span>I’m Confident Now • Exit Practice</span>
+</button>
+<p class="text-center font-label-sm text-label-sm text-on-surface-variant mt-2">You can revisit this sandbox anytime from your Memory Cards</p>
+</div>
+</div>
+<!-- Interactive Sandbox Micro-Interactions Script -->
+<script>
+  let isDNDOff = false;
+  let isPlayingVoice = false;
+
+  function toggleDNDPractice() {
+    const tile = document.getElementById('dndSimulatorBtn');
+    const icon = document.getElementById('dndIcon');
+    const iconBox = document.getElementById('dndIconBox');
+    const title = document.getElementById('dndTitle');
+    const status = document.getElementById('dndStatus');
+    const thumb = document.getElementById('dndSwitchThumb');
+    const pointer = document.getElementById('tutorialPointer');
+    const successCard = document.getElementById('successCard');
+
+    if (!isDNDOff) {
+      // Transition to OFF state (Normal phone ringing)
+      isDNDOff = true;
+      tile.className = "relative col-span-2 min-h-[72px] p-space-md rounded-xl flex items-center justify-between transition-all duration-300 active:scale-[0.98] bg-surface-container-highest text-on-surface shadow-sm";
+      iconBox.className = "w-12 h-12 rounded-full flex items-center justify-center bg-surface-container text-on-surface-variant shadow-sm";
+      icon.innerText = "notifications_active";
+      icon.style.fontVariationSettings = "'FILL' 0";
+      title.innerText = "Do Not Disturb";
+      status.innerText = "Turned OFF • Calls ring out loud!";
+      status.className = "font-label-md text-label-md text-tertiary font-semibold";
+      thumb.className = "w-6 h-6 rounded-full bg-outline shadow-md transform translate-x-0 transition-transform";
+      
+      // Hide pointer and show celebration card
+      if (pointer) pointer.classList.add('hidden');
+      if (successCard) successCard.classList.remove('hidden');
+    } else {
+      resetPractice();
+    }
+  }
+
+  function resetPractice() {
+    isDNDOff = false;
+    const tile = document.getElementById('dndSimulatorBtn');
+    const icon = document.getElementById('dndIcon');
+    const iconBox = document.getElementById('dndIconBox');
+    const title = document.getElementById('dndTitle');
+    const status = document.getElementById('dndStatus');
+    const thumb = document.getElementById('dndSwitchThumb');
+    const pointer = document.getElementById('tutorialPointer');
+    const successCard = document.getElementById('successCard');
+
+    tile.className = "relative col-span-2 min-h-[72px] p-space-md rounded-xl flex items-center justify-between transition-all duration-300 active:scale-[0.98] bg-secondary-container text-on-secondary-container shadow-md";
+    iconBox.className = "w-12 h-12 rounded-full flex items-center justify-center bg-secondary text-on-secondary shadow-sm";
+    icon.innerText = "do_not_disturb_on";
+    icon.style.fontVariationSettings = "'FILL' 1";
+    title.innerText = "Do Not Disturb";
+    status.innerText = "Currently ON • Calls are silenced";
+    status.className = "font-label-md text-label-md opacity-90";
+    thumb.className = "w-6 h-6 rounded-full bg-on-secondary shadow-md transform translate-x-6 transition-transform";
+
+    if (pointer) pointer.classList.remove('hidden');
+    if (successCard) successCard.classList.add('hidden');
+  }
+
+  function toggleVoiceNote() {
+    isPlayingVoice = !isPlayingVoice;
+    const playIcon = document.getElementById('playIcon');
+    const voiceTime = document.getElementById('voiceTime');
+    
+    if (isPlayingVoice) {
+      playIcon.innerText = "pause";
+      voiceTime.innerText = "Playing Rahul’s voice note (0:08 / 0:12)...";
+    } else {
+      playIcon.innerText = "play_arrow";
+      voiceTime.innerText = "Tap to listen • 0:12 duration";
+    }
+  }
+</script></main></body></html>

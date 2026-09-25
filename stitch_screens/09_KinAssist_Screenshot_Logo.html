@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" fill="none">
+  <defs>
+    <!-- Upper warm orange / gold gradients -->
+    <linearGradient id="warmTopLeft" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFA834" />
+      <stop offset="100%" stop-color="#E86C10" />
+    </linearGradient>
+    <linearGradient id="warmTopRight" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFBC58" />
+      <stop offset="100%" stop-color="#EA7E18" />
+    </linearGradient>
+
+    <!-- Lower wave cyan / blue gradients -->
+    <linearGradient id="blueWave" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#38BDF8" />
+      <stop offset="50%" stop-color="#0284C7" />
+      <stop offset="100%" stop-color="#0369A1" />
+    </linearGradient>
+    <linearGradient id="blueWaveLight" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7DD3FC" />
+      <stop offset="100%" stop-color="#0284C7" />
+    </linearGradient>
+
+    <!-- Subtle drop shadow -->
+    <filter id="softShadow" x="-10%" y="-10%" width="120%" height="125%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#000000" flood-opacity="0.15" />
+    </filter>
+  </defs>
+
+  <!-- Clean dark card background matching design system -->
+  <rect width="500" height="500" rx="36" fill="#181B20"/>
+
+  <g transform="translate(0, 15)">
+    <!-- Top Left Wing/Block -->
+    <path d="M195 95 C195 95 235 95 240 98 C244 100 245 106 245 118 L245 175 L200 175 C195 160 195 130 195 95 Z" 
+          fill="url(#warmTopLeft)" filter="url(#softShadow)" />
+
+    <!-- Top Right Wing/Block -->
+    <path d="M255 118 C255 106 256 100 260 98 C265 95 305 95 305 95 C305 130 305 160 300 175 L255 175 L255 118 Z" 
+          fill="url(#warmTopRight)" filter="url(#softShadow)" />
+
+    <!-- Lower Flowing Wave Emblem / Cross Shape -->
+    <!-- Left Column / Flowing water shape -->
+    <path d="M200 188 L245 188 L245 285 C240 280 220 280 200 295 C197 270 198 215 200 188 Z" 
+          fill="url(#blueWave)" opacity="0.95" />
+
+    <!-- Right Wave Body -->
+    <path d="M255 188 L300 188 C302 215 303 270 300 295 C280 280 260 280 255 285 L255 188 Z" 
+          fill="url(#blueWave)" opacity="0.95" />
+
+    <!-- Flowing Wave Bridge / Center Crest -->
+    <path d="M198 220 C230 200 270 240 302 215 L301 270 C280 292 220 255 198 275 Z" 
+          fill="url(#blueWaveLight)" />
+
+    <!-- Wordmark: KINASSIST -->
+    <text x="250" y="375" 
+          font-family="system-ui, -apple-system, 'Plus Jakarta Sans', sans-serif" 
+          font-size="38" 
+          font-weight="900" 
+          font-style="italic" 
+          letter-spacing="5" 
+          fill="#38BDF8" 
+          text-anchor="middle">
+      KINASSIST
+    </text>
+  </g>
+</svg>

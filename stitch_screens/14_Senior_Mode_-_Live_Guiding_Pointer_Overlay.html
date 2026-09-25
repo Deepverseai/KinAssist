@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_stack" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100vw;margin:0;padding:0;background-color:#111317;color:#e2e2e8;}body{overscroll-behavior:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "secondary": "#ffb4a4", "on-tertiary-fixed": "#002113", "on-primary": "#3c2f00", "on-secondary-fixed-variant": "#822714", "error-container": "#93000a", "on-background": "#e2e2e8", "outline": "#99907c", "on-primary-fixed": "#241a00", "error": "#ffb4ab", "tertiary": "#58e7aa", "surface-container-low": "#1a1c20", "on-error": "#690005", "inverse-on-surface": "#2f3035", "primary-container": "#d4af37", "surface-container-lowest": "#0c0e12", "on-tertiary-fixed-variant": "#005236", "on-secondary-fixed": "#3e0500", "on-secondary-container": "#ff9f8b", "secondary-fixed": "#ffdad3", "surface-container-high": "#282a2e", "surface-container": "#1e2024", "surface": "#111317", "on-surface-variant": "#d0c5af", "inverse-surface": "#e2e2e8", "tertiary-fixed-dim": "#4edea3", "secondary-container": "#852916", "surface-bright": "#37393e", "secondary-fixed-dim": "#ffb4a4", "tertiary-container": "#33ca90", "tertiary-fixed": "#6ffbbe", "on-tertiary-container": "#005035", "surface-dim": "#111317", "surface-tint": "#e9c349", "background": "#111317", "primary-fixed": "#ffe088", "on-primary-container": "#554300", "on-primary-fixed-variant": "#574500", "surface-container-highest": "#333539", "on-error-container": "#ffdad6", "primary": "#f2ca50", "outline-variant": "#4d4635", "inverse-primary": "#735c00", "on-tertiary": "#003824", "on-surface": "#e2e2e8", "on-secondary": "#621002", "primary-fixed-dim": "#e9c349", "surface-variant": "#333539" }, borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, spacing: { "space-xs": "0.5rem", "space-md": "1.25rem", "space-xl": "3rem", "margin": "2rem", "gutter-mobile": "1rem", "space-lg": "2rem", "space-sm": "0.75rem", "gutter": "1.5rem", "margin-mobile": "1.25rem" }, fontFamily: { "headline-lg": ["Plus Jakarta Sans"], "label-sm": ["Plus Jakarta Sans"], "headline-xl-mobile": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "label-lg": ["Plus Jakarta Sans"], "headline-xl": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"], "label-md": ["Plus Jakarta Sans"], "body-xl": ["Plus Jakarta Sans"], "headline-sm": ["Plus Jakarta Sans"], "headline-lg-mobile": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"] }, fontSize: { "headline-lg": ["32px", { lineHeight: "42px", letterSpacing: "-0.01em", fontWeight: "700" }], "label-sm": ["13px", { lineHeight: "18px", letterSpacing: "0.05em", fontWeight: "500" }], "headline-xl-mobile": ["32px", { lineHeight: "40px", letterSpacing: "-0.01em", fontWeight: "700" }], "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }], "label-lg": ["18px", { lineHeight: "26px", letterSpacing: "0.02em", fontWeight: "600" }], "headline-xl": ["40px", { lineHeight: "52px", letterSpacing: "-0.02em", fontWeight: "700" }], "headline-md": ["24px", { lineHeight: "32px", fontWeight: "600" }], "label-md": ["15px", { lineHeight: "20px", letterSpacing: "0.04em", fontWeight: "600" }], "body-xl": ["22px", { lineHeight: "34px", fontWeight: "400" }], "headline-sm": ["20px", { lineHeight: "28px", fontWeight: "600" }], "headline-lg-mobile": ["26px", { lineHeight: "34px", letterSpacing: "-0.01em", fontWeight: "700" }], "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }] } } } }</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface font-body-md text-on-surface flex flex-col min-h-screen"><header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.4)] pt-safe"><div class="h-20 px-gutter-mobile flex items-center justify-between"><div class="flex items-center gap-space-xs"><button aria-label="Go back" class="flex items-center justify-center min-w-[48px] min-h-[48px] rounded-xl text-on-surface hover:text-primary transition-colors" onclick="history.back()"><span class="material-symbols-outlined text-2xl">arrow_back_ios_new</span></button><img alt="KinAssist Guiding Star Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1XGXId7wP0mA_SdscVqdtZfA3UzyEIReXNdne_sAIzPgnIwhUQ1qhDVVWyuqzwytXN46vENYCsV_TwIXeu_SI2Y5cDFajDkpIOuIp3lHhZ6Hv6L75WDI77DPHZFvMnhaAyKfD-C5EZnpABiXWORh9Uax2rsJNocCNDOZ5G9cxWRum2p-HyG6YmcyIASFSGRwnfHw5zSEGs-G5soHb5wEWd_MGp0i4K0ptpNrb95_G_wdTTGvC5f2KdAavEl"/><h1 class="font-headline-sm text-headline-sm text-on-surface ml-1">Emergency Sos Trigger</h1></div><div class="flex items-center gap-space-xs"><div class="relative flex items-center justify-center min-w-[44px] min-h-[44px]"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBt3CYGEWVfhiS4zacFoIgCBl23U4OkX30pGS1-9DJ_C8Sqd5kfOVCm1INuZnjUEuuP5obwWNCEqaghzyqZAqs353U745u-5XP7nd3eAW9iCKTydH7wTJxRFLMcEh0scXSsrq-8v-60P6Uzk7Zysn9eVOc-j-FQVMGvXIMMqxNZ3Xun9n63lDfBabv50HGph7IsnVkmSFsHvZh69GG_eKOFO9hnGz8KrjH1TJw3t18XOmIVnTAT4HNGMQ"/></div></div></div></header><main class="flex flex-col relative w-full pt-20 pb-safe bg-surface min-h-screen"><div class="flex flex-col w-full relative select-none pb-6">
+<!-- Realtime Session Banner Overlay -->
+<div class="sticky top-2 z-40 px-gutter-mobile w-full mb-space-sm">
+<div class="w-full bg-surface-container-high/90 backdrop-blur-xl rounded-full p-2 pl-4 flex items-center justify-between shadow-xl">
+<div class="flex items-center gap-space-xs min-w-0">
+<!-- Live status pulse -->
+<div class="relative flex items-center justify-center w-3.5 h-3.5 shrink-0">
+<span class="absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75 animate-ping"></span>
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-tertiary"></span>
+</div>
+<div class="flex items-center gap-2 min-w-0">
+<span class="font-label-md text-label-md text-on-surface font-semibold truncate">Connected with Rahul</span>
+<span class="text-outline text-xs">•</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant shrink-0" id="session-timer">01:42</span>
+</div>
+</div>
+<div class="flex items-center gap-2 shrink-0">
+<!-- Speaker Waveform Pill -->
+<div class="flex items-center gap-1 bg-surface-container-lowest px-3 py-1.5 rounded-full text-tertiary">
+<span class="material-symbols-outlined text-[18px]">volume_up</span>
+<div class="flex items-end gap-0.5 h-3.5">
+<span class="w-0.5 bg-tertiary rounded-full animate-pulse h-2"></span>
+<span class="w-0.5 bg-tertiary rounded-full animate-pulse h-3.5" style="animation-delay: 150ms;"></span>
+<span class="w-0.5 bg-tertiary rounded-full animate-pulse h-1.5" style="animation-delay: 300ms;"></span>
+</div>
+</div>
+<!-- End Session Pill -->
+<button aria-label="End remote assistance session" class="h-10 px-4 rounded-full bg-secondary-container text-on-secondary-container font-label-md text-label-md flex items-center gap-1 active:scale-95 transition-transform" id="end-btn">
+<span class="material-symbols-outlined text-base">call_end</span>
+<span>End</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Simulated Phone System Settings Screen Canvas -->
+<div class="px-gutter-mobile flex flex-col gap-space-sm relative">
+<!-- Android Settings Header Card -->
+<div class="bg-surface-container rounded-2xl p-5 flex items-center justify-between shadow-md">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-xl bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">tune</span>
+</div>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Sound &amp; Vibration</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Phone ringtone, alerts, and silence</p>
+</div>
+</div>
+<div class="w-10 h-10 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-xl">search</span>
+</div>
+</div>
+<!-- Volume Adjuster Stack -->
+<div class="bg-surface-container rounded-2xl p-5 flex flex-col gap-5 shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-lg text-label-lg text-on-surface">Media volume</span>
+<span class="font-label-md text-label-md text-primary font-bold">75%</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant">volume_down</span>
+<div class="flex-1 h-3 bg-surface-container-lowest rounded-full overflow-hidden p-0.5">
+<div class="h-full bg-primary rounded-full w-3/4"></div>
+</div>
+<span class="material-symbols-outlined text-on-surface">volume_up</span>
+</div>
+<div class="flex items-center justify-between pt-2">
+<span class="font-label-lg text-label-lg text-on-surface">Call &amp; Notification ringtone</span>
+<span class="font-label-md text-label-md text-tertiary font-bold">100%</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+<div class="flex-1 h-3 bg-surface-container-lowest rounded-full overflow-hidden p-0.5">
+<div class="h-full bg-tertiary rounded-full w-full"></div>
+</div>
+<span class="material-symbols-outlined text-tertiary">notifications_active</span>
+</div>
+</div>
+<!-- Target Interaction Card: DO NOT DISTURB (With active Guiding Pointer) -->
+<div class="relative bg-surface-container rounded-2xl p-5 shadow-lg overflow-visible">
+<div class="flex items-center justify-between">
+<div class="flex items-start gap-3.5 pr-4">
+<div class="w-12 h-12 rounded-xl bg-error-container/30 flex items-center justify-center text-error shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">do_not_disturb_on</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Do Not Disturb</h3>
+<p class="font-body-md text-body-md text-error font-medium">Currently ON • All incoming calls muted</p>
+</div>
+</div>
+<!-- The Target Toggle Switch (High contrast 68x40 dp) -->
+<div class="relative shrink-0">
+<button aria-label="Toggle Do Not Disturb" class="relative w-[68px] h-[40px] rounded-full bg-primary-container p-1 transition-all flex items-center justify-end focus:outline-none shadow-md" id="dnd-switch">
+<span class="w-8 h-8 rounded-full bg-surface-container-lowest flex items-center justify-center text-primary shadow-sm font-bold">
+<span class="material-symbols-outlined text-xl">check</span>
+</span>
+</button>
+</div>
+</div>
+<!-- LIVE GUIDING POINTER OVERLAY ELEMENTS -->
+<!-- Hand-drawn radiant loop marker around the switch -->
+<div class="absolute right-3 top-3.5 w-24 h-16 pointer-events-none z-20">
+<svg class="w-full h-full stroke-secondary drop-shadow-[0_0_8px_rgba(255,180,164,0.6)]" fill="none" viewbox="0 0 100 60" xmlns="http://www.w3.org/2000/svg">
+<path class="opacity-90" d="M 12,30 C 10,8 80,6 90,26 C 96,44 68,56 30,52 C 8,48 4,24 24,14 C 44,4 92,12 88,38" stroke="currentColor" stroke-dasharray="240" stroke-dashoffset="0" stroke-linecap="round" stroke-width="3.5">
+<animate attributename="stroke-dashoffset" dur="2.4s" repeatcount="indefinite" values="480;0"></animate>
+</path>
+</svg>
+</div>
+<!-- Concentric animated ripple target rings over switch center -->
+<div class="absolute right-9 top-8 pointer-events-none z-10 flex items-center justify-center">
+<span class="absolute w-20 h-20 rounded-full bg-tertiary/20 animate-ping"></span>
+<span class="absolute w-14 h-14 rounded-full bg-tertiary/30 animate-pulse"></span>
+<span class="w-5 h-5 rounded-full bg-tertiary shadow-[0_0_16px_rgba(88,231,170,0.9)]"></span>
+</div>
+<!-- Caregiver Floating Arrow Pointer + Tooltip Badge -->
+<div class="absolute right-4 -bottom-14 z-30 pointer-events-none flex flex-col items-end animate-bounce" style="animation-duration: 2s;">
+<!-- Cursor Icon -->
+<div class="mr-6 mb-1 text-tertiary drop-shadow-[0_2px_10px_rgba(88,231,170,0.8)]">
+<svg fill="currentColor" height="34" viewbox="0 0 24 24" width="34">
+<path d="M4 2 L20 10 L12 12 L10 20 Z"></path>
+</svg>
+</div>
+<!-- Smart Guide Card -->
+<div class="bg-surface-container-highest/95 backdrop-blur-md px-4 py-2.5 rounded-xl shadow-2xl flex items-center gap-2 max-w-[260px]">
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary shrink-0"></span>
+<p class="font-label-md text-label-md text-on-surface font-semibold">
+            Rahul: <span class="text-tertiary font-normal">Tap here to turn off</span>
+</p>
+</div>
+</div>
+</div>
+<!-- Secondary Settings List Item (Vibration feedback) -->
+<div class="bg-surface-container rounded-2xl p-5 flex items-center justify-between shadow-sm mt-8">
+<div class="flex items-center gap-3.5">
+<div class="w-12 h-12 rounded-xl bg-surface-container-high flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-2xl">vibration</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Vibrate for incoming calls</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Always vibrate before ringing</p>
+</div>
+</div>
+<div class="w-[68px] h-[40px] rounded-full bg-surface-container-lowest p-1 flex items-center justify-start shrink-0">
+<span class="w-8 h-8 rounded-full bg-surface-bright flex items-center justify-center text-outline">
+<span class="material-symbols-outlined text-base">close</span>
+</span>
+</div>
+</div>
+<!-- Phone Ringtone Tile -->
+<div class="bg-surface-container rounded-2xl p-5 flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-3.5">
+<div class="w-12 h-12 rounded-xl bg-surface-container-high flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-2xl">music_note</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Phone ringtone</h3>
+<p class="font-body-md text-body-md text-primary">Gentle Marimba (Sim 1)</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
+</div>
+</div>
+<!-- Voice Intercom & Safe Exit Live Dock -->
+<div class="sticky bottom-2 z-40 px-gutter-mobile w-full mt-6 flex flex-col gap-2">
+<!-- Audio Wave Intercom Card -->
+<div class="bg-surface-container-high/95 backdrop-blur-xl rounded-2xl p-4 shadow-2xl flex items-center gap-3.5">
+<!-- Caregiver Mini Avatar disc -->
+<div class="relative shrink-0">
+<img class="w-12 h-12 rounded-full object-cover shadow-inner" data-alt="Warm photographic portrait of a smiling adult son named Rahul wearing a dark charcoal crew neck against soft natural home lighting, high contrast and dignified expression" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDB5olWX2rwKunEat0MkdF6WzYjqrL9sWzuAoQng7GY39P5gR5ti0xkwibmGZHqaLuIw_lXnyLJ_tKZDkpXzVEXCL8clCmDSQ985jf-IAEEqqct2JO-XZiLHqPBrejVrTFlT_u2jO7trXFDqKuFLDDu5eXogUXv-rBHPqv2ZuqJxgjBo-I0BgqMVY4CgYqs0r7fag0ADu5ThIL3EajYTOXfarWF0NVnazAZD5F214gaFmVshGC0LcmOqg"/>
+<span class="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-tertiary"></span>
+</div>
+<!-- Realtime Transcription -->
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm text-tertiary font-bold tracking-wider uppercase">Rahul Speaking</span>
+<span class="flex items-center gap-0.5">
+<span class="w-1 h-2 bg-tertiary rounded-full animate-bounce"></span>
+<span class="w-1 h-3 bg-tertiary rounded-full animate-bounce" style="animation-delay: 120ms;"></span>
+<span class="w-1 h-2 bg-tertiary rounded-full animate-bounce" style="animation-delay: 240ms;"></span>
+</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface truncate">
+          “Just tap the switch right where my green arrow points, Ma”
+        </p>
+</div>
+<!-- Quick Mute / Mic State -->
+<button aria-label="Microphone active" class="w-11 h-11 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface hover:text-primary active:scale-95 transition-transform shrink-0">
+<span class="material-symbols-outlined text-2xl">mic</span>
+</button>
+</div>
+<!-- Non-Intrusive Dignity & Safe Control Footer Indicator -->
+<div class="w-full text-center py-1">
+<p class="font-label-sm text-label-sm text-on-surface-variant flex items-center justify-center gap-1.5 opacity-90">
+<span class="material-symbols-outlined text-sm text-primary">verified_user</span>
+<span>You always have full control • Tap anywhere to pause remote guidance</span>
+</p>
+</div>
+</div>
+</div>
+<script>
+  (function() {
+    // Interactive demo response for the Do Not Disturb toggle
+    const dndButton = document.getElementById('dnd-switch');
+    if (dndButton) {
+      dndButton.addEventListener('click', function() {
+        const isOff = this.classList.contains('justify-start');
+        if (isOff) {
+          this.classList.remove('justify-start', 'bg-surface-container-lowest');
+          this.classList.add('justify-end', 'bg-primary-container');
+        } else {
+          this.classList.remove('justify-end', 'bg-primary-container');
+          this.classList.add('justify-start', 'bg-surface-container-lowest');
+        }
+      });
+    }
+
+    // Dynamic timer increment simulation
+    const timerElem = document.getElementById('session-timer');
+    if (timerElem) {
+      let seconds = 102;
+      setInterval(() => {
+        seconds++;
+        const mins = Math.floor(seconds / 60).toString().padStart(2, '0');
+        const secs = (seconds % 60).toString().padStart(2, '0');
+        timerElem.textContent = `${mins}:${secs}`;
+      }, 1000);
+    }
+  })();
+</script></main></body></html>

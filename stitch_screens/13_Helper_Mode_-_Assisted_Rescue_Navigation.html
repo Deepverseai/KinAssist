@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_stack" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100vw;margin:0;padding:0;background-color:#111317;color:#e2e2e8;}body{overscroll-behavior:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-secondary-container": "#ff9f8b", "on-tertiary-container": "#005035", "on-error-container": "#ffdad6", "outline": "#99907c", "error": "#ffb4ab", "secondary-fixed-dim": "#ffb4a4", "tertiary-fixed-dim": "#4edea3", "on-background": "#e2e2e8", "error-container": "#93000a", "on-tertiary": "#003824", "background": "#111317", "primary": "#f2ca50", "on-primary-container": "#554300", "on-primary-fixed": "#241a00", "surface-container-highest": "#333539", "surface-container-high": "#282a2e", "surface-bright": "#37393e", "tertiary-fixed": "#6ffbbe", "inverse-surface": "#e2e2e8", "on-surface": "#e2e2e8", "surface-container-lowest": "#0c0e12", "primary-fixed-dim": "#e9c349", "on-secondary": "#621002", "surface-tint": "#e9c349", "on-primary-fixed-variant": "#574500", "on-secondary-fixed-variant": "#822714", "on-primary": "#3c2f00", "on-secondary-fixed": "#3e0500", "secondary-fixed": "#ffdad3", "on-error": "#690005", "surface-dim": "#111317", "secondary": "#ffb4a4", "on-tertiary-fixed-variant": "#005236", "surface": "#111317", "on-surface-variant": "#d0c5af", "inverse-primary": "#735c00", "inverse-on-surface": "#2f3035", "primary-container": "#d4af37", "secondary-container": "#852916", "on-tertiary-fixed": "#002113", "surface-container-low": "#1a1c20", "tertiary-container": "#33ca90", "surface-variant": "#333539", "primary-fixed": "#ffe088", "tertiary": "#58e7aa", "surface-container": "#1e2024", "outline-variant": "#4d4635" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "margin": "2rem", "margin-mobile": "1.25rem", "space-lg": "2rem", "gutter": "1.5rem", "space-xs": "0.5rem", "gutter-mobile": "1rem", "space-md": "1.25rem", "space-xl": "3rem", "space-sm": "0.75rem" }, "fontFamily": { "label-sm": ["Plus Jakarta Sans"], "label-lg": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"], "body-xl": ["Plus Jakarta Sans"], "headline-xl-mobile": ["Plus Jakarta Sans"], "headline-xl": ["Plus Jakarta Sans"], "label-md": ["Plus Jakarta Sans"], "headline-lg-mobile": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "headline-sm": ["Plus Jakarta Sans"] }, "fontSize": { "label-sm": ["13px", { "lineHeight": "18px", "letterSpacing": "0.05em", "fontWeight": "500" }], "label-lg": ["18px", { "lineHeight": "26px", "letterSpacing": "0.02em", "fontWeight": "600" }], "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }], "body-xl": ["22px", { "lineHeight": "34px", "fontWeight": "400" }], "headline-xl-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "headline-xl": ["40px", { "lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "label-md": ["15px", { "lineHeight": "20px", "letterSpacing": "0.04em", "fontWeight": "600" }], "headline-lg-mobile": ["26px", { "lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "headline-lg": ["32px", { "lineHeight": "42px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }], "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }] } } } };</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface font-body-md text-on-surface flex flex-col min-h-screen overflow-x-hidden"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/85 backdrop-blur-xl shadow-[0_4px_24px_rgba(0,0,0,0.5)]"><div class="h-16 px-gutter-mobile flex items-center justify-between gap-space-xs"><div class="flex items-center gap-space-xs min-w-0"><button aria-label="Go back" class="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl bg-surface-container-high/60 text-on-surface hover:bg-surface-container-highest transition-colors active:scale-95" onclick="history.back()"><span class="material-symbols-outlined text-[24px]">arrow_back</span></button><img alt="KinAssist official brand logo recreated from user screenshot: a stylized split shield/cross icon with warm orange-gold upper segments and flowing gradient cyan-blue lower wave segments, paired with the bold italicized wordmark 'KINASSIST'.. Brand logo. - Primary color: #d4af37
+- Font: plusJakartaSans
+- Mode: dark
+- Roundness: rounded-md
+" class="h-8 w-auto object-contain shrink-0" src="https://lh3.googleusercontent.com/aida/AEtjO1UxF2FqtTYtXvx69BSTGDbIMt5ipgVXc81gTZs-bOMfUHpETrok5yCW3gMDUMtJIl5FhfTQLUGksVY0hsb13CG1z0LsXkJF-XXSp-bjA8xHGjuiNbTGX9qBhCjRGyEZV6ecyRb9--87mRGq8uoJQVCy1jJvYw8gtsKE-vQpYKC0_FaY4GzxTJfqTdLgxJhVAsLKXE1wfpWSPYdoM-t79EiZCoTErrtMbnjdplNElAyTyXNogrf7KxcP6Hsg"/><h1 class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight truncate pl-1">Caregiver Command Center</h1></div><div class="flex items-center gap-space-xs shrink-0"><div class="w-2.5 h-2.5 rounded-full bg-tertiary animate-pulse"></div><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-2 ring-surface-container-highest" src="https://lh3.googleusercontent.com/aida/AEtjO1VqAGeSmrRt25rc7hr7ogOrP2NOA6RlT91F3__ygoXGMLnsad_cGrtvpYoB7qw1UUtJBxty49cpUGsTeraN8pJHmpukR2E1fqbaBAieDgYATmmcxmjJzh7Yq6tguRFi6Cw4gdf_D7otJUhz-PnXVYbRmfGCbAzXor3kA3xSRL3Ffj2xKItLCrWJfeDm-HGIq4kFz24_2Q4C9WgnfEMvlwKT7u6fzZ8rSqWWzRp0ywSf1rjMwGN7SQnQ4o7I"/></div></div></header><main class="flex flex-col relative w-full pt-16 pb-safe bg-surface min-h-screen"><div class="flex flex-col w-full px-gutter-mobile py-space-sm space-y-space-md">
+<!-- Status & Session Telemetry Banner -->
+<div class="flex flex-col bg-surface-container-low rounded-xl p-space-md shadow-md space-y-space-xs">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-2 min-w-0">
+<span class="inline-flex relative flex-shrink-0 w-3 h-3">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span>
+<span class="relative inline-flex rounded-full w-3 h-3 bg-tertiary"></span>
+</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight truncate">Assisted Navigation &amp; Rescue</h2>
+</div>
+<div class="flex items-center bg-surface-container-high px-2.5 py-1 rounded-full space-x-1.5 shrink-0">
+<span class="material-symbols-outlined text-[16px] text-tertiary">bolt</span>
+<span class="font-label-sm text-label-sm text-tertiary font-semibold tracking-wide">34ms P2P Direct</span>
+</div>
+</div>
+<div class="flex items-center text-on-surface-variant font-label-md text-label-md space-x-1 truncate">
+<span class="material-symbols-outlined text-[18px] text-primary">smartphone</span>
+<span class="truncate">Mom's Phone (Galaxy S24 Ultra) • Accessibility Link Active</span>
+</div>
+</div>
+<!-- Section 1: Live Mini Stream Mirror -->
+<div class="flex flex-col bg-surface-container rounded-xl overflow-hidden shadow-lg">
+<div class="px-space-md py-space-xs bg-surface-container-high flex items-center justify-between">
+<div class="flex items-center space-x-2 min-w-0">
+<span class="material-symbols-outlined text-[18px] text-primary">screen_share</span>
+<span class="font-label-md text-label-md text-on-surface truncate">Current: Android Settings / Accessibility</span>
+</div>
+<span class="bg-surface-container-lowest text-tertiary font-label-sm text-label-sm px-2 py-0.5 rounded-full shrink-0">Live Mirror</span>
+</div>
+<!-- Screen Preview with Assist Overlay Marker -->
+<div class="relative w-full aspect-[16/9] bg-surface-container-lowest flex items-center justify-center overflow-hidden group">
+<!-- Simulated Senior View Mirror Image Placeholder -->
+<img class="w-full h-full object-cover opacity-80" data-alt="A smartphone screen captured at an angle showing modern Android settings menu with high contrast dark mode aesthetic, warm amber highlights, and soft cyan focus guide box indicating accessibility features." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCD3wPyHQlaqDtp3EWJTYrqGzxN2orSEA7JZgnRY-XX5KXiKc-HYUARJ01DcAOpeTdIEjWHzQay_2vVWS3Q-vj_ddfUpfnnBohbVmkzd-drggJ0YyOvdlDBkSugE11-CsduV5s8q9qZrzOd8-UkNLxO-Ku-HUDSLyskAshyrjeSNnBZ4DFbgCllHklPQShVIYuj5TukFBtWbpqVAioV7JYKnjTHl-0FTOHLNbYWlfXEYk8eu0UvlaxERQ"/>
+<!-- Remote Gesture Pointer Marker -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center pointer-events-none transition-all duration-300" id="assist-pointer">
+<div class="w-12 h-12 rounded-full bg-primary/20 animate-ping absolute"></div>
+<div class="w-8 h-8 rounded-full bg-primary/40 flex items-center justify-center shadow-lg">
+<div class="w-3.5 h-3.5 rounded-full bg-primary shadow-sm"></div>
+</div>
+<span class="absolute left-9 bg-surface-container-highest/90 text-on-surface font-label-sm text-label-sm px-2 py-1 rounded-md shadow-md whitespace-nowrap backdrop-blur-md">
+          Caregiver Crosshair
+        </span>
+</div>
+<!-- Quick Resolution Hint Overlay -->
+<div class="absolute bottom-2 left-2 right-2 flex justify-between items-center bg-surface-container-highest/80 backdrop-blur-md px-3 py-1.5 rounded-lg text-on-surface font-label-sm text-label-sm">
+<div class="flex items-center space-x-1.5">
+<span class="material-symbols-outlined text-[16px] text-tertiary">check_circle</span>
+<span>Touch Coordinates: X: 540 | Y: 1120</span>
+</div>
+<span class="text-on-surface-variant">Tap viewport to ping</span>
+</div>
+</div>
+</div>
+<!-- Toast Notification Bar for Actions -->
+<div class="hidden bg-primary text-on-primary font-label-md text-label-md px-4 py-2.5 rounded-xl shadow-xl flex items-center justify-between transition-all" id="action-toast">
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-[20px]">check_circle</span>
+<span id="toast-message">Accessibility action sent</span>
+</div>
+<span class="font-label-sm text-label-sm opacity-75">ACK 28ms</span>
+</div>
+<!-- Section 2: Core Assisted System Navigation Triggers -->
+<div class="flex flex-col space-y-space-xs">
+<div class="flex items-center justify-between px-1">
+<h3 class="font-label-lg text-label-lg text-on-surface font-semibold">Immediate System Triggers</h3>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Tactile 64dp Safe Touch</span>
+</div>
+<div class="grid grid-cols-2 gap-space-xs">
+<!-- GLOBAL BACK -->
+<button class="min-h-[64px] bg-surface-container hover:bg-surface-container-high active:scale-95 text-left p-space-sm rounded-xl flex items-center space-x-3 transition shadow-sm" onclick="triggerRescueAction('GLOBAL BACK', 'Simulating device hardware Back button')">
+<div class="w-12 h-12 rounded-xl bg-surface-container-highest flex items-center justify-center shrink-0 text-primary">
+<span class="material-symbols-outlined text-[28px]">arrow_back</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface font-semibold truncate">GLOBAL BACK</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant truncate">Exit stuck view</span>
+</div>
+</button>
+<!-- GO HOME -->
+<button class="min-h-[64px] bg-surface-container hover:bg-surface-container-high active:scale-95 text-left p-space-sm rounded-xl flex items-center space-x-3 transition shadow-sm" onclick="triggerRescueAction('GO HOME', 'Senior returned to default Simple Launcher')">
+<div class="w-12 h-12 rounded-xl bg-surface-container-highest flex items-center justify-center shrink-0 text-primary">
+<span class="material-symbols-outlined text-[28px]">home</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface font-semibold truncate">GO HOME</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant truncate">Launch home screen</span>
+</div>
+</button>
+<!-- OPEN NOTIFICATIONS -->
+<button class="min-h-[64px] bg-surface-container hover:bg-surface-container-high active:scale-95 text-left p-space-sm rounded-xl flex items-center space-x-3 transition shadow-sm" onclick="triggerRescueAction('OPEN NOTIFICATIONS', 'Expanding notification panel to reveal family alerts')">
+<div class="w-12 h-12 rounded-xl bg-surface-container-highest flex items-center justify-center shrink-0 text-primary">
+<span class="material-symbols-outlined text-[28px]">notifications_active</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface font-semibold truncate">NOTIFICATIONS</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant truncate">Pull down shade</span>
+</div>
+</button>
+<!-- APP SWITCHER -->
+<button class="min-h-[64px] bg-surface-container hover:bg-surface-container-high active:scale-95 text-left p-space-sm rounded-xl flex items-center space-x-3 transition shadow-sm" onclick="triggerRescueAction('APP SWITCHER', 'Triggering recent tasks overview')">
+<div class="w-12 h-12 rounded-xl bg-surface-container-highest flex items-center justify-center shrink-0 text-primary">
+<span class="material-symbols-outlined text-[28px]">view_carousel</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface font-semibold truncate">APP SWITCHER</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant truncate">Close frozen apps</span>
+</div>
+</button>
+</div>
+<!-- FORCE UNSTICK / SAFE REBOOT UI -->
+<button class="w-full min-h-[64px] mt-1 bg-secondary-container text-on-secondary-container hover:opacity-90 active:scale-[0.98] rounded-xl px-space-md py-space-sm flex items-center justify-between transition shadow-md" onclick="triggerRescueAction('FORCE UNSTICK', 'Overlay cache flushed &amp; UI rendering reloaded')">
+<div class="flex items-center space-x-3 min-w-0">
+<div class="w-12 h-12 rounded-xl bg-surface-container-lowest/40 flex items-center justify-center shrink-0 text-secondary-fixed">
+<span class="material-symbols-outlined text-[28px]">restart_alt</span>
+</div>
+<div class="flex flex-col text-left min-w-0">
+<span class="font-label-lg text-label-lg font-bold text-secondary-fixed truncate">FORCE UNSTICK / SAFE REBOOT UI</span>
+<span class="font-label-sm text-label-sm text-on-secondary-container opacity-90 truncate">Flushes stuck modal overlays &amp; releases system freezes</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-[24px] text-secondary-fixed shrink-0">chevron_right</span>
+</button>
+</div>
+<!-- Section 3: Remote Device Hardware Controls -->
+<div class="flex flex-col space-y-space-xs">
+<div class="flex items-center justify-between px-1">
+<h3 class="font-label-lg text-label-lg text-on-surface font-semibold">Remote Device Controls</h3>
+<span class="font-label-sm text-label-sm text-primary font-medium">Elevated Priority</span>
+</div>
+<div class="flex flex-col bg-surface-container rounded-xl divide-y-0 space-y-2 p-space-sm">
+<!-- Unmute & Maximize Ringer -->
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-high">
+<div class="flex items-center space-x-3 min-w-0">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[22px]">volume_up</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface font-semibold truncate">Unmute &amp; Maximize Ringer</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant truncate">Bypass DND mode if Mom isn't answering</span>
+</div>
+</div>
+<button class="min-w-[48px] h-10 px-3 rounded-lg bg-primary text-on-primary font-label-sm text-label-sm font-semibold active:scale-95 transition shrink-0" onclick="triggerRescueAction('VOLUME MAX', 'Device unmuted. Volume set to 100%')">
+          Set Max
+        </button>
+</div>
+<!-- Flash Torch Beacon -->
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-high">
+<div class="flex items-center space-x-3 min-w-0">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[22px]">flashlight_on</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface font-semibold truncate">Flash Torch Beacon</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant truncate">Strobes LED flash to help Mom locate phone</span>
+</div>
+</div>
+<button class="min-w-[48px] h-10 px-3 rounded-lg bg-surface-container-highest text-on-surface font-label-sm text-label-sm font-semibold active:scale-95 transition shrink-0" id="torch-btn" onclick="toggleTorch()">
+          Strobe (10s)
+        </button>
+</div>
+<!-- Speak Voice Announcement -->
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-high">
+<div class="flex items-center space-x-3 min-w-0">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-tertiary shrink-0">
+<span class="material-symbols-outlined text-[22px]">record_voice_over</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface font-semibold truncate">Speak Gentle Voice Memo</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant truncate">“Mom, Rahul is here to help”</span>
+</div>
+</div>
+<button class="min-w-[48px] h-10 px-3 rounded-lg bg-tertiary text-on-tertiary font-label-sm text-label-sm font-semibold active:scale-95 transition shrink-0" onclick="triggerRescueAction('VOICE PROMPT', 'Voice prompt broadcasted at conversational loudness')">
+          Broadcast
+        </button>
+</div>
+</div>
+</div>
+<!-- Section 4: Remote Gesture Directional Pad -->
+<div class="flex flex-col bg-surface-container rounded-xl p-space-md shadow-md space-y-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-[20px] text-primary">swipe</span>
+<h3 class="font-label-lg text-label-lg text-on-surface font-semibold">Remote Gesture Guiding Pad</h3>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Smooth 400px Scrim</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+      Guide pages without taking over personal privacy. Injects smooth directional scroll events.
+    </p>
+<!-- Cross Directional Swipe Buttons -->
+<div class="flex flex-col items-center justify-center py-2 space-y-2">
+<!-- UP -->
+<button class="w-28 h-12 bg-surface-container-high hover:bg-surface-container-highest active:scale-95 text-on-surface rounded-xl flex items-center justify-center space-x-1 transition shadow-sm" onclick="triggerRescueAction('SWIPE UP', 'Injected smooth swipe UP on senior viewport')">
+<span class="material-symbols-outlined text-[24px]">keyboard_arrow_up</span>
+<span class="font-label-md text-label-md font-semibold">Scroll Up</span>
+</button>
+<div class="flex items-center space-x-6">
+<!-- LEFT -->
+<button class="w-28 h-12 bg-surface-container-high hover:bg-surface-container-highest active:scale-95 text-on-surface rounded-xl flex items-center justify-center space-x-1 transition shadow-sm" onclick="triggerRescueAction('SWIPE LEFT', 'Injected page swipe LEFT on senior viewport')">
+<span class="material-symbols-outlined text-[24px]">keyboard_arrow_left</span>
+<span class="font-label-md text-label-md font-semibold">Prev</span>
+</button>
+<!-- Center Indicator -->
+<div class="w-12 h-12 rounded-full bg-surface-container-lowest flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined text-[22px]">touch_app</span>
+</div>
+<!-- RIGHT -->
+<button class="w-28 h-12 bg-surface-container-high hover:bg-surface-container-highest active:scale-95 text-on-surface rounded-xl flex items-center justify-center space-x-1 transition shadow-sm" onclick="triggerRescueAction('SWIPE RIGHT', 'Injected page swipe RIGHT on senior viewport')">
+<span class="font-label-md text-label-md font-semibold">Next</span>
+<span class="material-symbols-outlined text-[24px]">keyboard_arrow_right</span>
+</button>
+</div>
+<!-- DOWN -->
+<button class="w-28 h-12 bg-surface-container-high hover:bg-surface-container-highest active:scale-95 text-on-surface rounded-xl flex items-center justify-center space-x-1 transition shadow-sm" onclick="triggerRescueAction('SWIPE DOWN', 'Injected smooth swipe DOWN on senior viewport')">
+<span class="material-symbols-outlined text-[24px]">keyboard_arrow_down</span>
+<span class="font-label-md text-label-md font-semibold">Scroll Down</span>
+</button>
+</div>
+</div>
+<!-- Section 5: Safety Log & Permission Audit -->
+<div class="flex flex-col bg-surface-container-low rounded-xl p-space-md space-y-space-sm shadow-sm">
+<div class="flex items-start space-x-3">
+<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-tertiary shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[18px]">verified_user</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Accessibility Actions Audit</span>
+<p class="font-body-md text-body-md text-on-surface-variant mt-0.5">
+<span class="text-tertiary font-semibold" id="audit-counter">3 actions</span> logged this active session. An encrypted transparency receipt is sent to Mom's notification history for mutual dignity.
+        </p>
+</div>
+</div>
+<!-- Prominent Return to Live Visual Canvas Button -->
+<button class="w-full min-h-[56px] bg-primary text-on-primary hover:bg-primary-fixed-dim active:scale-[0.98] rounded-xl px-space-md py-space-sm font-label-lg text-label-lg font-bold flex items-center justify-center space-x-2 transition shadow-lg mt-2" onclick="window.history.back()">
+<span class="material-symbols-outlined text-[22px]">videocam</span>
+<span>Return to Live Visual Canvas</span>
+</button>
+</div>
+</div>
+<script>
+  let actionsCount = 3;
+
+  function triggerRescueAction(actionTitle, detailMsg) {
+    actionsCount++;
+    const auditEl = document.getElementById('audit-counter');
+    if (auditEl) {
+      auditEl.textContent = `${actionsCount} actions`;
+    }
+
+    const toast = document.getElementById('action-toast');
+    const msg = document.getElementById('toast-message');
+    if (toast && msg) {
+      msg.textContent = `${actionTitle}: ${detailMsg}`;
+      toast.classList.remove('hidden');
+      setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 3500);
+    }
+
+    // Micro-interactivity: gently twitch the crosshair on gesture or action
+    const pointer = document.getElementById('assist-pointer');
+    if (pointer) {
+      pointer.style.transform = 'translate(-40%, -60%) scale(1.15)';
+      setTimeout(() => {
+        pointer.style.transform = 'translate(-50%, -50%) scale(1)';
+      }, 300);
+    }
+  }
+
+  function toggleTorch() {
+    const btn = document.getElementById('torch-btn');
+    if (btn) {
+      btn.textContent = 'Active (Strobing)';
+      btn.classList.remove('bg-surface-container-highest', 'text-on-surface');
+      btn.classList.add('bg-primary', 'text-on-primary');
+      triggerRescueAction('TORCH BEACON', 'Strobing LED flash on senior handset for 10 seconds');
+      setTimeout(() => {
+        btn.textContent = 'Strobe (10s)';
+        btn.classList.add('bg-surface-container-highest', 'text-on-surface');
+        btn.classList.remove('bg-primary', 'text-on-primary');
+      }, 10000);
+    }
+  }
+</script></main></body></html>
