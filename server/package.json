@@ -1,0 +1,26 @@
+{
+  "name": "kinassist-signaling-server",
+  "version": "1.0.0",
+  "description": "High-performance WebSocket Signaling & Relay Server for KinAssist (1-Tap Remote Elderly Assistance)",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js",
+    "test": "node test_signaling.js"
+  },
+  "dependencies": {
+    "ws": "^8.18.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "webrtc",
+    "signaling",
+    "android",
+    "kinassist",
+    "elderly-care"
+  ],
+  "author": "Deepverseai",
+  "license": "Apache-2.0"
+}

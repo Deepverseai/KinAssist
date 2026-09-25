@@ -40,6 +40,11 @@ class ScreenCaptureService : Service() {
                     startForeground(NOTIFICATION_ID, buildNotification())
                     val projectionManager = getSystemService(Context.MEDIA_PROJECTION_SERVICE) as MediaProjectionManager
                     mediaProjection = projectionManager.getMediaProjection(resultCode, resultData)
+
+                    // Connect to WebRTC Video and Audio pipeline
+                    val webrtcManager = WebRtcManager.getInstance(applicationContext)
+                    webrtcManager.startScreenCapture(resultData)
+                    webrtcManager.startAudio()
                 } else {
                     stopSelf()
                 }
@@ -47,6 +52,7 @@ class ScreenCaptureService : Service() {
             ACTION_STOP -> {
                 mediaProjection?.stop()
                 mediaProjection = null
+                WebRtcManager.getInstance(applicationContext).close()
                 stopForeground(STOP_FOREGROUND_REMOVE)
                 stopSelf()
             }

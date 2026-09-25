@@ -104,23 +104,53 @@ kinassist/
 │   │   │   ├── MainActivity.kt
 │   │   │   ├── core/
 │   │   │   │   ├── webrtc/
-│   │   │   │   │   ├── PointerProtocol.kt
-│   │   │   │   │   ├── WebRtcManager.kt
-│   │   │   │   │   └── ScreenCaptureService.kt
+│   │   │   │   │   ├── PointerProtocol.kt       # Normalized coordinate data packet models
+│   │   │   │   │   ├── WebRtcManager.kt         # H.264 video pipeline, audio AEC & SDP negotiation
+│   │   │   │   │   └── ScreenCaptureService.kt  # MediaProjection hardware foreground streamer
+│   │   │   │   ├── signaling/
+│   │   │   │   │   ├── SignalingMessage.kt      # WebSocket message DTOs
+│   │   │   │   │   └── SignalingClient.kt       # Ktor WebSockets client with auto-reconnect
+│   │   │   │   ├── telemetry/
+│   │   │   │   │   └── TelemetryManager.kt      # Battery %, network transport & ringer emitter
+│   │   │   │   ├── pairing/
+│   │   │   │   │   └── PairingManager.kt        # EncryptedSharedPreferences persistence
 │   │   │   │   ├── overlay/
-│   │   │   │   │   └── PointerOverlayService.kt
+│   │   │   │   │   └── PointerOverlayService.kt # Floating system window animated pointer
 │   │   │   │   └── accessibility/
-│   │   │   │       └── KinAssistAccessibilityService.kt
+│   │   │   │       └── KinAssistAccessibilityService.kt # Rescue navigation & privacy shield
 │   │   │   └── ui/
-│   │   │       ├── theme/ (Color.kt, Type.kt, Theme.kt)
+│   │   │       ├── components/KinAssistVideoView.kt     # WebRTC SurfaceViewRenderer Compose wrapper
+│   │   │       ├── theme/ (Color.kt, Type.kt, Theme.kt) # Neutral Luxury palette
 │   │   │       └── screens/ (senior/, helper/, onboarding/, recap/)
 │   │   └── res/
 │   └── build.gradle.kts
+├── server/                   # Lightweight WebSocket Signaling Server
+│   ├── index.js              # Family room dispatch, SOS alerting & SDP relay
+│   ├── Dockerfile
+│   ├── docker-compose.yml    # Combined Signaling + Coturn STUN/TURN runner
+│   └── README.md
 ├── stitch_screens/           # 18 raw HTML/Tailwind screens from Google Stitch
 ├── docs/
 │   └── PRD.md                # Comprehensive Product Requirements Document
 ├── build.gradle.kts
 └── settings.gradle.kts
+```
+
+---
+
+## 🚀 Running the Signaling Server
+
+```bash
+cd server
+npm install
+npm start
+```
+Default port is `8080` (Healthcheck: `http://localhost:8080/health`).
+
+For production with Docker + Coturn TURN relay:
+```bash
+cd server
+docker-compose up -d
 ```
 
 ---
@@ -133,4 +163,4 @@ kinassist/
 ---
 
 ## 📄 License
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the Apache 2.0 License.

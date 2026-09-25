@@ -49,6 +49,7 @@ class KinAssistAccessibilityService : AccessibilityService() {
             val packageName = event.packageName?.toString() ?: return
             val isSensitive = SENSITIVE_PACKAGES.contains(packageName)
             _isSensitiveAppForeground.value = isSensitive
+            com.kinassist.app.core.webrtc.WebRtcManager.getInstance(applicationContext).setPrivacyBlackout(isSensitive)
         }
     }
 

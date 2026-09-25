@@ -28,11 +28,19 @@ import androidx.compose.ui.unit.sp
 import com.kinassist.app.core.webrtc.PointerEvent
 import com.kinassist.app.core.webrtc.PointerType
 import com.kinassist.app.core.webrtc.RescueCommand
+import com.kinassist.app.core.webrtc.TelemetryData
+import com.kinassist.app.ui.components.KinAssistVideoView
 import com.kinassist.app.ui.theme.*
+import org.webrtc.VideoTrack
 
 @Composable
 fun HelperCanvasScreen(
+    remoteVideoTrack: VideoTrack? = null,
+    isPrivacyBlackout: Boolean = false,
+    telemetryData: TelemetryData? = null,
     onSendPointerEvent: (PointerEvent) -> Unit,
+    onSendRescueCommand: (RescueCommand) -> Unit = {},
+    onToggleMute: (Boolean) -> Unit = {},
     onDisconnect: () -> Unit
 ) {
     var selectedTool by remember { mutableStateOf(PointerType.ARROW_PULSE) }
@@ -77,7 +85,7 @@ fun HelperCanvasScreen(
                                 color = TextOnSurfacePrimary
                             )
                             Text(
-                                text = "42ms Latency • 1080p 30fps",
+                                text = "${telemetryData?.latencyMs ?: 42}ms Latency • 1080p 30fps",
                                 style = MaterialTheme.typography.labelSmall,
                                 color = TextOnSurfaceVariant
                             )
@@ -97,12 +105,16 @@ fun HelperCanvasScreen(
                             horizontalArrangement = Arrangement.spacedBy(4.dp)
                         ) {
                             Icon(
-                                imageVector = Icons.Default.BatteryChargingFull,
+                                imageVector = if (telemetryData?.isCharging == true) Icons.Default.BatteryChargingFull else Icons.Default.BatteryStd,
                                 contentDescription = "Battery",
                                 tint = EmeraldTertiary,
                                 modifier = Modifier.size(16.dp)
                             )
-                            Text(text = "84%", fontSize = 12.sp, color = TextOnSurfacePrimary)
+                            Text(
+                                text = "${telemetryData?.batteryLevel ?: 84}%",
+                                fontSize = 12.sp,
+                                color = TextOnSurfacePrimary
+                            )
                         }
 
                         // End Session Button
@@ -155,7 +167,10 @@ fun HelperCanvasScreen(
                     }
 
                     IconButton(
-                        onClick = { isMuted = !isMuted },
+                        onClick = {
+                            isMuted = !isMuted
+                            onToggleMute(isMuted)
+                        },
                         modifier = Modifier
                             .size(36.dp)
                             .background(SurfaceContainerHigh, CircleShape)
@@ -198,74 +213,123 @@ fun HelperCanvasScreen(
                                 }
                             }
                     ) {
-                        // Simulated Mirror Content (Settings screen with Wi-Fi / DND)
-                        Column(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .padding(14.dp),
-                            verticalArrangement = Arrangement.spacedBy(10.dp)
-                        ) {
-                            // Status bar
-                            Row(
-                                modifier = Modifier.fillMaxWidth(),
-                                horizontalArrangement = Arrangement.SpaceBetween
+                        if (isPrivacyBlackout) {
+                            // Hardware-level Privacy Blackout Shield (Banking/Password App)
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .background(DeepCanvas)
+                                    .padding(20.dp),
+                                contentAlignment = Alignment.Center
                             ) {
-                                Text(text = "09:41", fontSize = 11.sp, color = TextOnSurfaceVariant)
-                                Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-                                    Icon(imageVector = Icons.Default.Wifi, contentDescription = null, tint = TextOnSurfaceVariant, modifier = Modifier.size(12.dp))
-                                    Icon(imageVector = Icons.Default.BatteryFull, contentDescription = null, tint = TextOnSurfaceVariant, modifier = Modifier.size(12.dp))
+                                Column(
+                                    horizontalAlignment = Alignment.CenterHorizontally,
+                                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                                ) {
+                                    Box(
+                                        modifier = Modifier
+                                            .size(60.dp)
+                                            .background(GoldPrimary.copy(alpha = 0.15f), CircleShape),
+                                        contentAlignment = Alignment.Center
+                                    ) {
+                                        Icon(
+                                            imageVector = Icons.Default.Security,
+                                            contentDescription = "Shield",
+                                            tint = GoldPrimary,
+                                            modifier = Modifier.size(32.dp)
+                                        )
+                                    }
+                                    Text(
+                                        text = "Screen Paused for Privacy",
+                                        style = MaterialTheme.typography.titleSmall,
+                                        fontWeight = FontWeight.Bold,
+                                        color = TextOnSurfacePrimary,
+                                        textAlign = TextAlign.Center
+                                    )
+                                    Text(
+                                        text = "Mom opened a sensitive banking or password screen. Video feed is hidden.",
+                                        style = MaterialTheme.typography.bodySmall,
+                                        color = TextOnSurfaceVariant,
+                                        textAlign = TextAlign.Center
+                                    )
                                 }
                             }
-
-                            Text(
-                                text = "Settings",
-                                fontSize = 18.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = TextOnSurfacePrimary
+                        } else if (remoteVideoTrack != null) {
+                            // Real Live WebRTC Screen Share Feed from Mom's Phone
+                            KinAssistVideoView(
+                                videoTrack = remoteVideoTrack,
+                                modifier = Modifier.fillMaxSize()
                             )
-
-                            // Item 1
-                            Row(
+                        } else {
+                            // Simulated Mirror Fallback (when waiting for stream)
+                            Column(
                                 modifier = Modifier
-                                    .fillMaxWidth()
-                                    .clip(RoundedCornerShape(10.dp))
-                                    .background(SurfaceContainer)
-                                    .padding(10.dp),
-                                verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.SpaceBetween
+                                    .fillMaxSize()
+                                    .padding(14.dp),
+                                verticalArrangement = Arrangement.spacedBy(10.dp)
                             ) {
-                                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                                    Icon(imageVector = Icons.Default.Wifi, contentDescription = null, tint = GoldPrimary, modifier = Modifier.size(18.dp))
-                                    Text(text = "Wi-Fi & Internet", fontSize = 13.sp, color = TextOnSurfacePrimary)
-                                }
-                                Icon(imageVector = Icons.Default.ChevronRight, contentDescription = null, tint = TextOnSurfaceVariant, modifier = Modifier.size(16.dp))
-                            }
-
-                            // Item 2: Target Button Mom is stuck on
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .clip(RoundedCornerShape(10.dp))
-                                    .background(SurfaceContainerHigh)
-                                    .border(1.5.dp, EmeraldTertiary.copy(alpha = 0.5f), RoundedCornerShape(10.dp))
-                                    .padding(10.dp),
-                                verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.SpaceBetween
-                            ) {
-                                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                                    Icon(imageVector = Icons.Default.DoNotDisturb, contentDescription = null, tint = TerracottaSOS, modifier = Modifier.size(18.dp))
-                                    Column {
-                                        Text(text = "Do Not Disturb", fontSize = 13.sp, fontWeight = FontWeight.SemiBold, color = TextOnSurfacePrimary)
-                                        Text(text = "Calls are muted", fontSize = 11.sp, color = TerracottaSOS)
+                                // Status bar
+                                Row(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    horizontalArrangement = Arrangement.SpaceBetween
+                                ) {
+                                    Text(text = "09:41", fontSize = 11.sp, color = TextOnSurfaceVariant)
+                                    Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                                        Icon(imageVector = Icons.Default.Wifi, contentDescription = null, tint = TextOnSurfaceVariant, modifier = Modifier.size(12.dp))
+                                        Icon(imageVector = Icons.Default.BatteryFull, contentDescription = null, tint = TextOnSurfaceVariant, modifier = Modifier.size(12.dp))
                                     }
                                 }
-                                Box(
+
+                                Text(
+                                    text = "Settings",
+                                    fontSize = 18.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    color = TextOnSurfacePrimary
+                                )
+
+                                // Item 1
+                                Row(
                                     modifier = Modifier
-                                        .size(24.dp)
-                                        .background(EmeraldTertiary, CircleShape),
-                                    contentAlignment = Alignment.Center
+                                        .fillMaxWidth()
+                                        .clip(RoundedCornerShape(10.dp))
+                                        .background(SurfaceContainer)
+                                        .padding(10.dp),
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement = Arrangement.SpaceBetween
                                 ) {
-                                    Text(text = "ON", fontSize = 9.sp, fontWeight = FontWeight.Bold, color = Color.Black)
+                                    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                                        Icon(imageVector = Icons.Default.Wifi, contentDescription = null, tint = GoldPrimary, modifier = Modifier.size(18.dp))
+                                        Text(text = "Wi-Fi & Internet", fontSize = 13.sp, color = TextOnSurfacePrimary)
+                                    }
+                                    Icon(imageVector = Icons.Default.ChevronRight, contentDescription = null, tint = TextOnSurfaceVariant, modifier = Modifier.size(16.dp))
+                                }
+
+                                // Item 2: Target Button Mom is stuck on
+                                Row(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .clip(RoundedCornerShape(10.dp))
+                                        .background(SurfaceContainerHigh)
+                                        .border(1.5.dp, EmeraldTertiary.copy(alpha = 0.5f), RoundedCornerShape(10.dp))
+                                        .padding(10.dp),
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement = Arrangement.SpaceBetween
+                                ) {
+                                    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                                        Icon(imageVector = Icons.Default.DoNotDisturb, contentDescription = null, tint = TerracottaSOS, modifier = Modifier.size(18.dp))
+                                        Column {
+                                            Text(text = "Do Not Disturb", fontSize = 13.sp, fontWeight = FontWeight.SemiBold, color = TextOnSurfacePrimary)
+                                            Text(text = "Calls are muted", fontSize = 11.sp, color = TerracottaSOS)
+                                        }
+                                    }
+                                    Box(
+                                        modifier = Modifier
+                                            .size(24.dp)
+                                            .background(EmeraldTertiary, CircleShape),
+                                        contentAlignment = Alignment.Center
+                                    ) {
+                                        Text(text = "ON", fontSize = 9.sp, fontWeight = FontWeight.Bold, color = Color.Black)
+                                    }
                                 }
                             }
                         }
@@ -404,6 +468,7 @@ fun HelperCanvasScreen(
                                 icon = Icons.Default.ArrowBack,
                                 label = "Press Back",
                                 onClick = {
+                                    onSendRescueCommand(RescueCommand.GLOBAL_BACK)
                                     onSendPointerEvent(
                                         PointerEvent(type = PointerType.RESCUE_ACTION, rescueCommand = RescueCommand.GLOBAL_BACK)
                                     )
@@ -414,6 +479,7 @@ fun HelperCanvasScreen(
                                 icon = Icons.Default.Home,
                                 label = "Go Home",
                                 onClick = {
+                                    onSendRescueCommand(RescueCommand.GLOBAL_HOME)
                                     onSendPointerEvent(
                                         PointerEvent(type = PointerType.RESCUE_ACTION, rescueCommand = RescueCommand.GLOBAL_HOME)
                                     )
@@ -424,6 +490,7 @@ fun HelperCanvasScreen(
                                 icon = Icons.Default.Notifications,
                                 label = "Notifications",
                                 onClick = {
+                                    onSendRescueCommand(RescueCommand.GLOBAL_NOTIFICATIONS)
                                     onSendPointerEvent(
                                         PointerEvent(type = PointerType.RESCUE_ACTION, rescueCommand = RescueCommand.GLOBAL_NOTIFICATIONS)
                                     )

@@ -5,6 +5,7 @@ import android.app.Application
 class KinAssistApp : Application() {
     override fun onCreate() {
         super.onCreate()
-        // Initialize global configs, WebRTC, and Encrypted Preferences
+        // Initialize WebRTC Factory and hardware acceleration globally
+        com.kinassist.app.core.webrtc.WebRtcManager.getInstance(this).initFactory()
     }
 }
