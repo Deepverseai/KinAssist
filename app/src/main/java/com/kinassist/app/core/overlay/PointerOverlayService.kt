@@ -213,7 +213,7 @@ fun FloatingSafetyPill(
             )
         }
     }
-
+}
 
 @Composable
 fun CleanActivePointerLayer(event: PointerEvent) {

@@ -1,10 +1,7 @@
-import com.google.gms.googleservices.GoogleServicesPlugin.MissingGoogleServicesStrategy
-
 plugins {
   alias(libs.plugins.android.application)
   alias(libs.plugins.kotlin.compose)
   alias(libs.plugins.kotlin.serialization)
-  alias(libs.plugins.google.services)
 }
 
 android {
@@ -23,17 +20,13 @@ android {
 
   signingConfigs {
     create("release") {
-      val keystorePath = System.getenv("KEYSTORE_PATH") ?: "${rootDir}/my-upload-key.jks"
-      storeFile = file(keystorePath)
-      storePassword = System.getenv("STORE_PASSWORD")
-      keyAlias = "upload"
-      keyPassword = System.getenv("KEY_PASSWORD")
-    }
-    create("debugConfig") {
-      storeFile = file("${rootDir}/debug.keystore")
-      storePassword = "android"
-      keyAlias = "androiddebugkey"
-      keyPassword = "android"
+      val keystorePath = System.getenv("KEYSTORE_PATH")
+      if (!keystorePath.isNullOrBlank()) {
+        storeFile = file(keystorePath)
+        storePassword = System.getenv("STORE_PASSWORD")
+        keyAlias = "upload"
+        keyPassword = System.getenv("KEY_PASSWORD")
+      }
     }
   }
 
@@ -42,9 +35,16 @@ android {
       isMinifyEnabled = true
       isShrinkResources = false
       proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-      signingConfig = signingConfigs.getByName("debugConfig") // fallback to debugConfig if release key not provided
+      val releaseConfig = signingConfigs.findByName("release")
+      if (releaseConfig?.storeFile != null && releaseConfig.storeFile!!.exists()) {
+        signingConfig = releaseConfig
+      } else {
+        signingConfig = signingConfigs.getByName("debug")
+      }
     }
-    debug { signingConfig = signingConfigs.getByName("debugConfig") }
+    debug {
+      // Uses standard Android debug signing config automatically
+    }
   }
   compileOptions {
     sourceCompatibility = JavaVersion.VERSION_17
@@ -61,11 +61,8 @@ android {
   }
 }
 
-googleServices { missingGoogleServicesStrategy = MissingGoogleServicesStrategy.WARN }
-
 dependencies {
   implementation(platform(libs.androidx.compose.bom))
-  implementation(platform(libs.firebase.bom))
 
   // Jetpack Compose & UI
   implementation(libs.androidx.activity.compose)
