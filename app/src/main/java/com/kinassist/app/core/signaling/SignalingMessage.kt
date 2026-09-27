@@ -16,6 +16,7 @@ data class BaseSignalingMessage(
     val role: String? = null,
     val deviceName: String? = null,
     val seniorName: String? = null,
+    val helperName: String? = null,
     val batteryLevel: String? = null,
     val reason: String? = null,
     val sdp: String? = null,
