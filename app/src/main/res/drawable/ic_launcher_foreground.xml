@@ -1,13 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
     android:width="108dp"
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
-    <path
-        android:fillColor="#D4AF37"
-        android:pathData="M54,24 A30,30 0 1,0 54,84 A30,30 0 1,0 54,24 Z" />
-    <path
-        android:fillColor="#0F1115"
-        android:pathData="M44,48 L54,38 L64,48 L58,48 L58,68 L50,68 L50,48 Z" />
+
+    <!-- KinAssist Emblem centered strictly inside the 66dp safe zone (max radius 30.4dp < 33dp) -->
+    <group
+        android:translateX="0.25"
+        android:translateY="13.0">
+
+        <!-- Top-Left Orange Wing (Angled upward rescue wing) -->
+        <path android:pathData="M 34.5,23.5 C 40,20.5 46.5,18.5 53,17.5 L 53,34.5 C 46.5,33.5 40,33.5 34.5,34.5 Z">
+            <aapt:attr name="android:fillColor">
+                <gradient
+                    android:startX="34.5"
+                    android:startY="34.5"
+                    android:endX="53"
+                    android:endY="17.5"
+                    android:type="linear">
+                    <item android:offset="0.0" android:color="#EB3C00" />
+                    <item android:offset="0.5" android:color="#FF7A00" />
+                    <item android:offset="1.0" android:color="#FFC107" />
+                </gradient>
+            </aapt:attr>
+        </path>
+
+        <!-- Top-Right Orange Wing (Smooth rounded top-right corner) -->
+        <path android:pathData="M 55.5,34.5 L 55.5,20 C 61,18 67,17 70.5,19 C 72.5,20.5 73.5,24 73,34.5 Z">
+            <aapt:attr name="android:fillColor">
+                <gradient
+                    android:startX="55.5"
+                    android:startY="34.5"
+                    android:endX="73.5"
+                    android:endY="17.5"
+                    android:type="linear">
+                    <item android:offset="0.0" android:color="#EB3C00" />
+                    <item android:offset="0.5" android:color="#FF7A00" />
+                    <item android:offset="1.0" android:color="#FFC107" />
+                </gradient>
+            </aapt:attr>
+        </path>
+
+        <!-- Upper Sky Cyan Wave (Dynamic arched flow) -->
+        <path android:pathData="M 34.5,36.5 L 53,36.5 C 58,41.5 64,43.5 73,42 L 73,53 C 68,56 61,53 54,48 C 47,43 40,43.5 34.5,47 Z">
+            <aapt:attr name="android:fillColor">
+                <gradient
+                    android:startX="34.5"
+                    android:startY="36.5"
+                    android:endX="73"
+                    android:endY="53"
+                    android:type="linear">
+                    <item android:offset="0.0" android:color="#00DCFF" />
+                    <item android:offset="0.5" android:color="#00B0FF" />
+                    <item android:offset="1.0" android:color="#0284C7" />
+                </gradient>
+            </aapt:attr>
+        </path>
+
+        <!-- Lower Azure & Royal Blue Wave Body with Central Arch Portal -->
+        <path android:pathData="M 34.5,46 C 40,43 46,43.5 53,48 C 60,53 66,54 73,52 L 73,61 C 67,64.5 60,64.5 55.5,64.5 L 55.5,50.5 L 51.5,50.5 L 51.5,64.5 L 34.5,64.5 Z">
+            <aapt:attr name="android:fillColor">
+                <gradient
+                    android:startX="34.5"
+                    android:startY="46"
+                    android:endX="73"
+                    android:endY="65"
+                    android:type="linear">
+                    <item android:offset="0.0" android:color="#0096FF" />
+                    <item android:offset="0.4" android:color="#005AEB" />
+                    <item android:offset="0.8" android:color="#002DAF" />
+                    <item android:offset="1.0" android:color="#05196E" />
+                </gradient>
+            </aapt:attr>
+        </path>
+    </group>
 </vector>

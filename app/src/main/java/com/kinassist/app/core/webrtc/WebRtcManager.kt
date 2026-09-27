@@ -67,10 +67,13 @@ class WebRtcManager(private val context: Context) {
             .createInitializationOptions()
         PeerConnectionFactory.initialize(initializationOptions)
 
-        // Configure Audio Engine with Acoustic Echo Cancellation (AEC) and Noise Suppression (NS)
+        // Configure Audio Engine with Acoustic Echo Cancellation (AEC) and Noise Suppression (NS) if hardware supports it
+        val useHardwareAec = JavaAudioDeviceModule.isBuiltInAcousticEchoCancelerSupported()
+        val useHardwareNs = JavaAudioDeviceModule.isBuiltInNoiseSuppressorSupported()
+
         val audioDeviceModule = JavaAudioDeviceModule.builder(context)
-            .setUseHardwareAcousticEchoCanceler(true)
-            .setUseHardwareNoiseSuppressor(true)
+            .setUseHardwareAcousticEchoCanceler(useHardwareAec)
+            .setUseHardwareNoiseSuppressor(useHardwareNs)
             .createAudioDeviceModule()
 
         peerConnectionFactory = PeerConnectionFactory.builder()
@@ -143,28 +146,39 @@ class WebRtcManager(private val context: Context) {
      */
     fun startScreenCapture(
         permissionIntent: Intent,
-        width: Int = 1080,
-        height: Int = 1920,
-        fps: Int = 30
+        width: Int = 720,
+        height: Int = 1280,
+        fps: Int = 24
     ) {
         val factory = peerConnectionFactory ?: return
-        surfaceTextureHelper = SurfaceTextureHelper.create("ScreenCaptureThread", rootEglBase.eglBaseContext)
+        try {
+            val metrics = context.resources.displayMetrics
+            val targetW = if (metrics.widthPixels in 320..1080) metrics.widthPixels else width
+            val targetH = if (metrics.heightPixels in 480..1920) metrics.heightPixels else height
 
-        videoCapturer = ScreenCapturerAndroid(permissionIntent, object : MediaProjection.Callback() {
-            override fun onStop() {
-                Log.w(TAG, "MediaProjection stopped by OS or user.")
+            surfaceTextureHelper = SurfaceTextureHelper.create("ScreenCaptureThread", rootEglBase.eglBaseContext)
+
+            videoCapturer = ScreenCapturerAndroid(permissionIntent, object : MediaProjection.Callback() {
+                override fun onStop() {
+                    Log.w(TAG, "MediaProjection stopped by OS or user.")
+                }
+            })
+
+            val capturer = videoCapturer ?: return
+            videoSource = factory.createVideoSource(capturer.isScreencast)
+            capturer.initialize(surfaceTextureHelper, context, videoSource?.capturerObserver)
+            capturer.startCapture(targetW, targetH, fps)
+
+            localVideoTrack = factory.createVideoTrack("kinassist_screen_track", videoSource)
+            localVideoTrack?.setEnabled(true)
+
+            localVideoTrack?.let { track ->
+                peerConnection?.addTrack(track, listOf("kinassist_stream"))
             }
-        })
-
-        videoSource = factory.createVideoSource(videoCapturer!!.isScreencast)
-        videoCapturer?.initialize(surfaceTextureHelper, context, videoSource?.capturerObserver)
-        videoCapturer?.startCapture(width, height, fps)
-
-        localVideoTrack = factory.createVideoTrack("kinassist_screen_track", videoSource)
-        localVideoTrack?.setEnabled(true)
-
-        peerConnection?.addTrack(localVideoTrack, listOf("kinassist_stream"))
-        Log.d(TAG, "Screen capture pipeline active ($width x $height @ ${fps}fps)")
+            Log.d(TAG, "Screen capture pipeline active ($targetW x $targetH @ ${fps}fps)")
+        } catch (e: Throwable) {
+            Log.e(TAG, "Screen capture pipeline failed: ${e.message}", e)
+        }
     }
 
     /**
@@ -172,29 +186,42 @@ class WebRtcManager(private val context: Context) {
      */
     fun startAudio() {
         val factory = peerConnectionFactory ?: return
-        val audioConstraints = MediaConstraints().apply {
-            mandatory.add(MediaConstraints.KeyValuePair("googEchoCancellation", "true"))
-            mandatory.add(MediaConstraints.KeyValuePair("googAutoGainControl", "true"))
-            mandatory.add(MediaConstraints.KeyValuePair("googHighpassFilter", "true"))
-            mandatory.add(MediaConstraints.KeyValuePair("googNoiseSuppression", "true"))
+        try {
+            val audioConstraints = MediaConstraints().apply {
+                mandatory.add(MediaConstraints.KeyValuePair("googEchoCancellation", "true"))
+                mandatory.add(MediaConstraints.KeyValuePair("googAutoGainControl", "true"))
+                mandatory.add(MediaConstraints.KeyValuePair("googHighpassFilter", "true"))
+                mandatory.add(MediaConstraints.KeyValuePair("googNoiseSuppression", "true"))
+            }
+
+            audioSource = factory.createAudioSource(audioConstraints)
+            localAudioTrack = factory.createAudioTrack("kinassist_audio_track", audioSource)
+            localAudioTrack?.setEnabled(true)
+
+            localAudioTrack?.let { track ->
+                peerConnection?.addTrack(track, listOf("kinassist_stream"))
+            }
+            Log.d(TAG, "VoIP Audio Intercom track attached.")
+        } catch (e: Throwable) {
+            Log.e(TAG, "Audio intercom setup failed: ${e.message}", e)
         }
-
-        audioSource = factory.createAudioSource(audioConstraints)
-        localAudioTrack = factory.createAudioTrack("kinassist_audio_track", audioSource)
-        localAudioTrack?.setEnabled(true)
-
-        peerConnection?.addTrack(localAudioTrack, listOf("kinassist_stream"))
-        Log.d(TAG, "VoIP Audio Intercom track attached.")
     }
 
     fun setAudioMuted(muted: Boolean) {
         localAudioTrack?.setEnabled(!muted)
     }
 
-    fun setPrivacyBlackout(blackout: Boolean) {
+    fun setPrivacyBlackout(blackout: Boolean, reason: String = "Screen Paused for Privacy") {
         _isPrivacyBlackoutActive.value = blackout
         // When blackout is active, temporarily disable the video track to ensure hardware privacy
         localVideoTrack?.setEnabled(!blackout)
+        // Broadcast over DataChannel to remote helper so UI shows privacy shield
+        sendPrivacyAlert(blackout, reason)
+    }
+
+    fun sendPrivacyAlert(isBlackout: Boolean, reason: String = "Screen Paused for Privacy") {
+        val alert = PrivacyAlert(isBlackoutActive = isBlackout, reason = reason)
+        sendJsonOnDataChannel(alert.toJson())
     }
 
     /**
@@ -228,6 +255,11 @@ class WebRtcManager(private val context: Context) {
     }
 
     private fun handleIncomingDataMessage(jsonStr: String) {
+        PrivacyAlert.fromJson(jsonStr)?.let { alert ->
+            Log.d(TAG, "Incoming PrivacyAlert received: isBlackoutActive=${alert.isBlackoutActive}")
+            _isPrivacyBlackoutActive.value = alert.isBlackoutActive
+            return
+        }
         PointerEvent.fromJson(jsonStr)?.let { event ->
             _receivedPointerEvents.value = event
             return

@@ -8,6 +8,9 @@ console.log('🧪 Starting KinAssist End-to-End Signaling Test...');
 const seniorWs = new WebSocket(URL);
 const helperWs = new WebSocket(URL);
 
+seniorWs.on('error', (err) => console.error('👵 Senior WS Error:', err.message));
+helperWs.on('error', (err) => console.error('🧑‍💻 Helper WS Error:', err.message));
+
 let testsPassed = 0;
 
 seniorWs.on('open', () => {

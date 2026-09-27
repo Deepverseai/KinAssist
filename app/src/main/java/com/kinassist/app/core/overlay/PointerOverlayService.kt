@@ -8,7 +8,6 @@ import android.os.Build
 import android.os.IBinder
 import android.view.Gravity
 import android.view.WindowManager
-import androidx.compose.animation.core.*
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -18,16 +17,14 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.NearMe
-import androidx.compose.material.icons.filled.Security
 import androidx.compose.material3.Icon
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.scale
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -49,7 +46,8 @@ import kotlinx.coroutines.flow.asStateFlow
 class PointerOverlayService : Service(), LifecycleOwner, SavedStateRegistryOwner {
 
     private lateinit var windowManager: WindowManager
-    private var overlayComposeView: ComposeView? = null
+    private var pointerComposeView: ComposeView? = null
+    private var pillComposeView: ComposeView? = null
 
     private val lifecycleRegistry = LifecycleRegistry(this)
     private val savedStateRegistryController = SavedStateRegistryController.create(this)
@@ -61,11 +59,20 @@ class PointerOverlayService : Service(), LifecycleOwner, SavedStateRegistryOwner
         private val _currentPointerEvent = MutableStateFlow<PointerEvent?>(null)
         val currentPointerEvent = _currentPointerEvent.asStateFlow()
 
+        private var clearJob: kotlinx.coroutines.Job? = null
+        private val overlayScope = kotlinx.coroutines.CoroutineScope(kotlinx.coroutines.Dispatchers.Main + kotlinx.coroutines.SupervisorJob())
+
         fun showPointer(event: PointerEvent) {
             _currentPointerEvent.value = event
+            clearJob?.cancel()
+            clearJob = overlayScope.launch {
+                kotlinx.coroutines.delay(event.durationMs.coerceAtLeast(2000L))
+                _currentPointerEvent.value = null
+            }
         }
 
         fun clearPointer() {
+            clearJob?.cancel()
             _currentPointerEvent.value = null
         }
     }
@@ -78,10 +85,10 @@ class PointerOverlayService : Service(), LifecycleOwner, SavedStateRegistryOwner
         lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
 
         windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
-        initOverlayView()
+        initOverlayViews()
     }
 
-    private fun initOverlayView() {
+    private fun initOverlayViews() {
         val layoutType = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
         } else {
@@ -89,36 +96,81 @@ class PointerOverlayService : Service(), LifecycleOwner, SavedStateRegistryOwner
             WindowManager.LayoutParams.TYPE_PHONE
         }
 
-        val params = WindowManager.LayoutParams(
+        // 1. Full-screen Pointer Canvas with FLAG_NOT_TOUCHABLE (Touch pass-through to underlying apps)
+        val pointerParams = WindowManager.LayoutParams(
             WindowManager.LayoutParams.MATCH_PARENT,
             WindowManager.LayoutParams.MATCH_PARENT,
+            layoutType,
+            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or
+                    WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL or
+                    WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN or
+                    WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+            PixelFormat.TRANSLUCENT
+        ).apply {
+            gravity = Gravity.TOP or Gravity.START
+        }
+
+        pointerComposeView = ComposeView(this).apply {
+            setViewTreeLifecycleOwner(this@PointerOverlayService)
+            setViewTreeSavedStateRegistryOwner(this@PointerOverlayService)
+            setContent {
+                KinAssistTheme(darkTheme = false) {
+                    val activeEvent by currentPointerEvent.collectAsState()
+                    activeEvent?.let { event ->
+                        CleanActivePointerLayer(event = event)
+                    }
+                }
+            }
+        }
+
+        // 2. Small Floating Safety Pill Window (Touchable so user can end session anytime)
+        val pillParams = WindowManager.LayoutParams(
+            WindowManager.LayoutParams.WRAP_CONTENT,
+            WindowManager.LayoutParams.WRAP_CONTENT,
             layoutType,
             WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or
                     WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL or
                     WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN,
             PixelFormat.TRANSLUCENT
         ).apply {
-            gravity = Gravity.TOP or Gravity.START
+            gravity = Gravity.TOP or Gravity.END
+            y = 80
+            x = 32
         }
 
-        overlayComposeView = ComposeView(this).apply {
+        pillComposeView = ComposeView(this).apply {
             setViewTreeLifecycleOwner(this@PointerOverlayService)
             setViewTreeSavedStateRegistryOwner(this@PointerOverlayService)
             setContent {
-                KinAssistTheme(darkTheme = true) {
-                    PointerOverlayContent(
+                KinAssistTheme(darkTheme = false) {
+                    FloatingSafetyPill(
                         onEndSession = { stopSelf() }
                     )
                 }
             }
         }
 
-        windowManager.addView(overlayComposeView, params)
+        try {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || android.provider.Settings.canDrawOverlays(this)) {
+                windowManager.addView(pointerComposeView, pointerParams)
+                windowManager.addView(pillComposeView, pillParams)
+            } else {
+                android.util.Log.w("PointerOverlayService", "Overlay permission not granted; skipping window overlay.")
+            }
+        } catch (e: Exception) {
+            android.util.Log.w("PointerOverlayService", "Could not add overlay window: ${e.message}")
+        }
     }
 
     override fun onDestroy() {
         lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-        overlayComposeView?.let { windowManager.removeView(it) }
+        clearPointer()
+        try {
+            pointerComposeView?.let { windowManager.removeView(it) }
+            pillComposeView?.let { windowManager.removeView(it) }
+        } catch (e: Exception) {
+            android.util.Log.w("PointerOverlayService", "Could not remove overlay view: ${e.message}")
+        }
         super.onDestroy()
     }
 
@@ -126,122 +178,114 @@ class PointerOverlayService : Service(), LifecycleOwner, SavedStateRegistryOwner
 }
 
 @Composable
-fun PointerOverlayContent(
+fun FloatingSafetyPill(
     onEndSession: () -> Unit
 ) {
-    val activeEvent by PointerOverlayService.currentPointerEvent.collectAsState()
-
-    Box(modifier = Modifier.fillMaxSize()) {
-        // 1. Persistent Top Floating Safety Pill
+    Surface(
+        modifier = Modifier
+            .clickable { onEndSession() },
+        shape = RoundedCornerShape(24.dp),
+        color = SlateSurfaceLight.copy(alpha = 0.95f),
+        border = androidx.compose.foundation.BorderStroke(1.dp, SlateBorderLight),
+        tonalElevation = 4.dp
+    ) {
         Row(
-            modifier = Modifier
-                .align(Alignment.TopEnd)
-                .padding(top = 40.dp, end = 16.dp)
-                .background(SurfaceContainerHigh.copy(alpha = 0.95f), RoundedCornerShape(24.dp))
-                .clickable { onEndSession() }
-                .padding(horizontal = 14.dp, vertical = 8.dp),
+            modifier = Modifier.padding(horizontal = 14.dp, vertical = 8.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            Box(
-                modifier = Modifier
-                    .size(10.dp)
-                    .background(EmeraldTertiary, CircleShape)
-            )
+            Surface(
+                modifier = Modifier.size(10.dp),
+                shape = CircleShape,
+                color = CareGreen
+            ) {}
             Text(
-                text = "Rahul is helping",
-                color = TextOnSurfacePrimary,
+                text = "Family Assist Active",
+                color = TextPrimaryLight,
                 fontSize = 13.sp,
                 fontWeight = FontWeight.SemiBold
             )
             Icon(
                 imageVector = Icons.Default.Close,
                 contentDescription = "End Session",
-                tint = TextOnSurfaceVariant,
+                tint = TextSecondaryLight,
                 modifier = Modifier.size(16.dp)
             )
         }
-
-        // 2. Active Pointer & Ripple Layer
-        activeEvent?.let { event ->
-            ActivePointerLayer(event = event)
-        }
     }
-}
+
 
 @Composable
-fun ActivePointerLayer(event: PointerEvent) {
-    val infiniteTransition = rememberInfiniteTransition(label = "pulse")
-    val rippleRadius by infiniteTransition.animateFloat(
-        initialValue = 20f,
-        targetValue = 90f,
-        animationSpec = infiniteRepeatable(
-            animation = tween(1200, easing = LinearEasing),
-            repeatMode = RepeatMode.Restart
-        ),
-        label = "ripple"
-    )
-    val rippleAlpha by infiniteTransition.animateFloat(
-        initialValue = 0.8f,
-        targetValue = 0f,
-        animationSpec = infiniteRepeatable(
-            animation = tween(1200, easing = LinearEasing),
-            repeatMode = RepeatMode.Restart
-        ),
-        label = "alpha"
-    )
-
+fun CleanActivePointerLayer(event: PointerEvent) {
     BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
         val pxX = maxWidth * event.xRatio
         val pxY = maxHeight * event.yRatio
 
-        // Expanding Pulse Circle
+        // Clean Target Circle Marker
         Canvas(modifier = Modifier.fillMaxSize()) {
             val centerOffset = Offset(pxX.toPx(), pxY.toPx())
+            // High contrast white ring
             drawCircle(
-                color = EmeraldPulse.copy(alpha = rippleAlpha),
-                radius = rippleRadius,
-                center = centerOffset,
-                style = Stroke(width = 4f)
+                color = Color.White,
+                radius = 24f,
+                center = centerOffset
             )
+            // Clean primary circle
             drawCircle(
-                color = EmeraldPulse,
-                radius = 12f,
+                color = PrimaryBlue,
+                radius = 18f,
+                center = centerOffset
+            )
+            // Center focal dot
+            drawCircle(
+                color = Color.White,
+                radius = 6f,
                 center = centerOffset
             )
         }
 
-        // Guiding Pointer Arrow & Label
+        // Guiding Pointer Arrow & Step Label
         Box(
             modifier = Modifier
-                .offset(x = pxX - 24.dp, y = pxY - 60.dp)
-                .scale(1.1f)
+                .offset(x = pxX - 22.dp, y = pxY - 54.dp)
         ) {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                Box(
-                    modifier = Modifier
-                        .size(44.dp)
-                        .background(EmeraldTertiary, CircleShape),
-                    contentAlignment = Alignment.Center
+                Surface(
+                    modifier = Modifier.size(38.dp),
+                    shape = CircleShape,
+                    color = PrimaryBlue,
+                    border = androidx.compose.foundation.BorderStroke(2.dp, Color.White),
+                    tonalElevation = 4.dp
                 ) {
-                    Icon(
-                        imageVector = Icons.Default.NearMe,
-                        contentDescription = "Pointer",
-                        tint = TextOnPrimary,
-                        modifier = Modifier.size(24.dp)
-                    )
+                    Box(contentAlignment = Alignment.Center) {
+                        if (event.type == PointerType.STEP_BADGE && event.stepNumber != null) {
+                            Text(
+                                text = "${event.stepNumber}",
+                                color = Color.White,
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.Bold
+                            )
+                        } else {
+                            Icon(
+                                imageVector = Icons.Default.NearMe,
+                                contentDescription = "Pointer",
+                                tint = Color.White,
+                                modifier = Modifier.size(22.dp)
+                            )
+                        }
+                    }
                 }
-                Spacer(modifier = Modifier.height(4.dp))
-                Box(
-                    modifier = Modifier
-                        .background(SurfaceContainerHighest.copy(alpha = 0.95f), RoundedCornerShape(12.dp))
-                        .padding(horizontal = 8.dp, vertical = 4.dp)
+                Spacer(modifier = Modifier.height(3.dp))
+                Surface(
+                    shape = RoundedCornerShape(8.dp),
+                    color = Color.Black.copy(alpha = 0.8f)
                 ) {
                     Text(
-                        text = "Tap here",
+                        text = if (event.type == PointerType.STEP_BADGE) "Step #${event.stepNumber}" else "Tap here",
                         color = Color.White,
                         fontSize = 11.sp,
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
                     )
                 }
             }

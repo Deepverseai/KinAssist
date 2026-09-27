@@ -11,6 +11,7 @@ data class PairingConfig(
     val familyCode: String,
     val seniorName: String,
     val helperName: String,
+    val helperPhone: String,
     val signalingUrl: String
 )
 
@@ -23,6 +24,7 @@ class PairingManager(private val context: Context) {
         private const val KEY_FAMILY_CODE = "key_family_code"
         private const val KEY_SENIOR_NAME = "key_senior_name"
         private const val KEY_HELPER_NAME = "key_helper_name"
+        private const val KEY_HELPER_PHONE = "key_helper_phone"
         private const val KEY_SIGNALING_URL = "key_signaling_url"
         const val DEFAULT_SIGNALING_URL = "ws://10.0.2.2:8080"
     }
@@ -41,7 +43,6 @@ class PairingManager(private val context: Context) {
                 EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
             )
         } catch (e: Exception) {
-            // Fallback to standard private mode in case of keystore anomaly
             context.getSharedPreferences(PREFS_FILE, Context.MODE_PRIVATE)
         }
     }
@@ -53,8 +54,9 @@ class PairingManager(private val context: Context) {
             isPaired = prefs.getBoolean(KEY_IS_PAIRED, false),
             role = prefs.getString(KEY_ROLE, "SENIOR") ?: "SENIOR",
             familyCode = prefs.getString(KEY_FAMILY_CODE, "884219") ?: "884219",
-            seniorName = prefs.getString(KEY_SENIOR_NAME, "Mom") ?: "Mom",
-            helperName = prefs.getString(KEY_HELPER_NAME, "Rahul (Son)") ?: "Rahul (Son)",
+            seniorName = prefs.getString(KEY_SENIOR_NAME, "Senior") ?: "Senior",
+            helperName = prefs.getString(KEY_HELPER_NAME, "Caregiver") ?: "Caregiver",
+            helperPhone = prefs.getString(KEY_HELPER_PHONE, "") ?: "",
             signalingUrl = prefs.getString(KEY_SIGNALING_URL, DEFAULT_SIGNALING_URL) ?: DEFAULT_SIGNALING_URL
         )
     }
@@ -62,8 +64,9 @@ class PairingManager(private val context: Context) {
     fun savePairing(
         role: String,
         familyCode: String,
-        seniorName: String = "Mom",
-        helperName: String = "Rahul (Son)",
+        seniorName: String = "Senior",
+        helperName: String = "Caregiver",
+        helperPhone: String = "",
         signalingUrl: String = DEFAULT_SIGNALING_URL
     ) {
         prefs.edit()
@@ -72,6 +75,7 @@ class PairingManager(private val context: Context) {
             .putString(KEY_FAMILY_CODE, familyCode)
             .putString(KEY_SENIOR_NAME, seniorName)
             .putString(KEY_HELPER_NAME, helperName)
+            .putString(KEY_HELPER_PHONE, helperPhone)
             .putString(KEY_SIGNALING_URL, signalingUrl)
             .apply()
     }

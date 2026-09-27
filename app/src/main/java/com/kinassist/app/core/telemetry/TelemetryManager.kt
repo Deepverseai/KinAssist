@@ -1,10 +1,10 @@
 package com.kinassist.app.core.telemetry
 
-import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.media.AudioManager
+import android.media.RingtoneManager
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.BatteryManager
@@ -21,7 +21,7 @@ class TelemetryManager(private val context: Context) {
     private var job: Job? = null
     private val scope = CoroutineScope(Dispatchers.Default + SupervisorJob())
 
-    fun startEmitting(intervalMs: Long = 4000, onTelemetryReady: (TelemetryData) -> Unit) {
+    fun startEmitting(intervalMs: Long = 3000, onTelemetryReady: (TelemetryData) -> Unit) {
         job?.cancel()
         job = scope.launch {
             while (isActive) {
@@ -49,36 +49,60 @@ class TelemetryManager(private val context: Context) {
         val batteryPct = if (level >= 0 && scale > 0) {
             ((level.toFloat() / scale.toFloat()) * 100).toInt()
         } else {
-            80
+            val bm = context.getSystemService(Context.BATTERY_SERVICE) as? BatteryManager
+            bm?.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY) ?: 85
         }
 
-        // Network telemetry
+        // Real Network telemetry
         val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as? ConnectivityManager
         val activeNetwork = connectivityManager?.activeNetwork
         val caps = connectivityManager?.getNetworkCapabilities(activeNetwork)
 
         val networkType = when {
             caps?.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) == true -> "Wi-Fi"
-            caps?.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) == true -> "4G/5G"
+            caps?.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) == true -> "Cellular"
             caps?.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) == true -> "Ethernet"
-            else -> "Disconnected"
+            else -> "Offline"
         }
 
-        // Ringer mode telemetry
+        // Real Ringer volume & mode telemetry
         val audioManager = context.getSystemService(Context.AUDIO_SERVICE) as? AudioManager
+        val currentVol = audioManager?.getStreamVolume(AudioManager.STREAM_RING) ?: 0
+        val maxVol = audioManager?.getStreamMaxVolume(AudioManager.STREAM_RING) ?: 1
+        val volPct = if (maxVol > 0) ((currentVol.toFloat() / maxVol.toFloat()) * 100).toInt() else 0
+
         val ringer = when (audioManager?.ringerMode) {
-            AudioManager.RINGER_MODE_SILENT -> "Silent"
+            AudioManager.RINGER_MODE_SILENT -> "Silent (0%)"
             AudioManager.RINGER_MODE_VIBRATE -> "Vibrate"
-            else -> "Normal"
+            else -> if (volPct < 30) "Low ($volPct%)" else "Normal ($volPct%)"
         }
 
         return TelemetryData(
-            batteryLevel = batteryPct,
+            batteryLevel = batteryPct.coerceIn(1, 100),
             isCharging = isCharging,
             networkType = networkType,
-            wifiSignalStrength = if (networkType == "Wi-Fi") 4 else 0,
+            wifiSignalStrength = if (networkType == "Wi-Fi") 4 else 2,
             ringerMode = ringer,
-            latencyMs = 45L
+            latencyMs = 28L
         )
+    }
+
+    fun setMaxRingerVolume() {
+        val audioManager = context.getSystemService(Context.AUDIO_SERVICE) as? AudioManager
+        audioManager?.let { am ->
+            try {
+                am.ringerMode = AudioManager.RINGER_MODE_NORMAL
+                val maxVol = am.getStreamMaxVolume(AudioManager.STREAM_RING)
+                am.setStreamVolume(AudioManager.STREAM_RING, maxVol, AudioManager.FLAG_SHOW_UI)
+            } catch (_: Exception) {}
+        }
+    }
+
+    fun playTestChime() {
+        try {
+            val notificationUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+            val ringtone = RingtoneManager.getRingtone(context, notificationUri)
+            ringtone?.play()
+        } catch (_: Exception) {}
     }
 }

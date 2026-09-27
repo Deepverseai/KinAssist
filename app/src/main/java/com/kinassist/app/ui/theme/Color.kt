@@ -2,25 +2,57 @@ package com.kinassist.app.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-// Stitch Dark OLED Neutral Luxury Palette
-val DeepCanvas = Color(0xFF0F1115)           // Pure OLED dark slate
-val SurfaceContainerLowest = Color(0xFF090D13)
-val SurfaceContainerLow = Color(0xFF13171F)
-val SurfaceContainer = Color(0xFF181B20)     // Standard Card Container
-val SurfaceContainerHigh = Color(0xFF22262E)    // Elevated Sheet / Interactive Surfaces
-val SurfaceContainerHighest = Color(0xFF2C323D)
-val OutlineBorder = Color(0xFF2F343E)        // Crisp 1px boundary line
+// ============================================================================
+// KinAssist Clean, Dignified & Accessible Theme Palette
+// Optimized for Senior Readability & Calming Family Caregiver Aesthetics
+// No neon glows or harsh sci-fi contrast. Warm, soft, high-legibility design.
+// ============================================================================
 
-// Accent & Interaction Colors
-val GoldPrimary = Color(0xFFD4AF37)          // Warm Champagne Gold
-val GoldContainer = Color(0xFF856E16)
-val EmeraldTertiary = Color(0xFF10B981)      // Trust & Active Connection (Radiant Emerald)
-val EmeraldPulse = Color(0xFF58E7AA)         // Real-time Guiding Pointer Glow
-val CyanPerception = Color(0xFF06B6D4)       // AI / Active Telemetry
-val TerracottaSOS = Color(0xFFE06C53)        // Urgent Alert / SOS Button Gradient
-val UrgentRed = Color(0xFFEF4444)            // Immediate Attention
+// Light Surface & Canvas (Clean porcelain / soft slate)
+val SlateBackgroundLight = Color(0xFFF8FAFC)
+val SlateSurfaceLight = Color(0xFFFFFFFF)
+val SlateSurfaceVariantLight = Color(0xFFF1F5F9)
+val SlateBorderLight = Color(0xFFE2E8F0)
+val SlateBorderStrongLight = Color(0xFFCBD5E1)
 
-// Typography Contrast Colors
-val TextOnSurfacePrimary = Color(0xFFF5F6F8) // Crisp Warm White (>7:1 WCAG AAA)
-val TextOnSurfaceVariant = Color(0xFF9CA3AF) // Secondary Muted Slate
-val TextOnPrimary = Color(0xFF0F1115)        // Contrast text on Gold/Emerald
+// Dark Surface & Canvas (Refined, calm charcoal / deep slate - not harsh neon black)
+val SlateBackgroundDark = Color(0xFF0F172A)
+val SlateSurfaceDark = Color(0xFF1E293B)
+val SlateSurfaceVariantDark = Color(0xFF334155)
+val SlateBorderDark = Color(0xFF334155)
+val SlateBorderStrongDark = Color(0xFF475569)
+
+// Primary Brand Colors (Trustworthy, compassionate Royal Blue / Slate Indigo)
+val PrimaryBlue = Color(0xFF2563EB)
+val PrimaryBlueHover = Color(0xFF1D4ED8)
+val PrimaryBlueContainerLight = Color(0xFFDBEAFE)
+val PrimaryBlueContainerDark = Color(0xFF1E3A8A)
+
+// Caregiver & Success Accent (Warm Sage / Forest Green)
+val CareGreen = Color(0xFF059669)
+val CareGreenLight = Color(0xFFD1FAE5)
+val CareGreenDark = Color(0xFF065F46)
+
+// Urgent SOS / Alert Color (Warm Crimson / Coral - High contrast, no neon glare)
+val SosRed = Color(0xFFDC2626)
+val SosRedLight = Color(0xFFFEE2E2)
+val SosRedDark = Color(0xFF991B1B)
+
+// Status & Accent Gold/Amber (Warm Honey / Sunlight - friendly, soft)
+val WarmAmber = Color(0xFFD97706)
+val WarmAmberLight = Color(0xFFFEF3C7)
+
+// Text Colors (High contrast, meets WCAG AAA standards for seniors)
+val TextPrimaryLight = Color(0xFF0F172A)
+val TextSecondaryLight = Color(0xFF475569)
+val TextTertiaryLight = Color(0xFF64748B)
+
+val TextPrimaryDark = Color(0xFFF8FAFC)
+val TextSecondaryDark = Color(0xFF94A3B8)
+val TextTertiaryDark = Color(0xFF64748B)
+
+// Pointer Canvas Tool Colors (Clean, sharp, accessible markers)
+val PointerBlue = Color(0xFF1D4ED8)
+val PointerGreen = Color(0xFF047857)
+val PointerAmber = Color(0xFFB45309)
+val PointerRed = Color(0xFFB91C1C)

@@ -1,20 +1,18 @@
 package com.kinassist.app.ui.screens.helper
 
-import androidx.compose.animation.core.*
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.scale
-import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -24,28 +22,21 @@ import com.kinassist.app.ui.theme.*
 
 @Composable
 fun CaregiverIncomingAlertScreen(
+    seniorName: String = "Family Member",
+    issueReason: String = "Direct 1-Tap SOS • Needs assistance",
+    seniorBattery: String = "Battery Good",
+    networkType: String = "Wi-Fi",
     onAcceptCall: () -> Unit,
     onDeclineCall: () -> Unit
 ) {
-    val infiniteTransition = rememberInfiniteTransition(label = "ring_chime")
-    val pulseScale by infiniteTransition.animateFloat(
-        initialValue = 1f,
-        targetValue = 1.25f,
-        animationSpec = infiniteRepeatable(
-            animation = tween(1100, easing = FastOutSlowInEasing),
-            repeatMode = RepeatMode.Reverse
-        ),
-        label = "chime"
-    )
+    BackHandler {
+        onDeclineCall()
+    }
 
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(
-                Brush.verticalGradient(
-                    listOf(DeepCanvas, SurfaceContainerLowest, Color(0xFF1F0D0A))
-                )
-            ),
+            .background(MaterialTheme.colorScheme.background),
         contentAlignment = Alignment.Center
     ) {
         Column(
@@ -56,91 +47,89 @@ fun CaregiverIncomingAlertScreen(
             verticalArrangement = Arrangement.SpaceBetween
         ) {
             // Top Badge
-            Row(
-                modifier = Modifier
-                    .padding(top = 40.dp)
-                    .background(TerracottaSOS.copy(alpha = 0.2f), RoundedCornerShape(20.dp))
-                    .border(1.dp, TerracottaSOS.copy(alpha = 0.5f), RoundedCornerShape(20.dp))
-                    .padding(horizontal = 16.dp, vertical = 8.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            Surface(
+                modifier = Modifier.padding(top = 44.dp),
+                shape = RoundedCornerShape(20.dp),
+                color = SosRedLight,
+                border = androidx.compose.foundation.BorderStroke(1.dp, SosRed.copy(alpha = 0.3f))
             ) {
-                Box(
-                    modifier = Modifier
-                        .size(8.dp)
-                        .background(TerracottaSOS, CircleShape)
-                )
-                Text(
-                    text = "PRIORITY ASSIST SOS",
-                    color = TerracottaSOS,
-                    fontSize = 12.sp,
-                    fontWeight = FontWeight.Bold,
-                    letterSpacing = 1.sp
-                )
+                Row(
+                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    Surface(
+                        modifier = Modifier.size(8.dp),
+                        shape = CircleShape,
+                        color = SosRed
+                    ) {}
+                    Text(
+                        text = "FAMILY ASSIST REQUEST",
+                        color = SosRedDark,
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight.Bold,
+                        letterSpacing = 1.sp
+                    )
+                }
             }
 
-            // Center: Avatar with Chime Rings
+            // Center: Avatar and Info
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                Box(
-                    contentAlignment = Alignment.Center,
-                    modifier = Modifier.size(200.dp)
+                Surface(
+                    modifier = Modifier
+                        .size(130.dp)
+                        .shadow(6.dp, CircleShape),
+                    shape = CircleShape,
+                    color = MaterialTheme.colorScheme.primaryContainer,
+                    border = androidx.compose.foundation.BorderStroke(3.dp, MaterialTheme.colorScheme.primary)
                 ) {
-                    Box(
-                        modifier = Modifier
-                            .size(190.dp)
-                            .scale(pulseScale)
-                            .clip(CircleShape)
-                            .background(TerracottaSOS.copy(alpha = 0.15f))
-                    )
-                    Box(
-                        modifier = Modifier
-                            .size(140.dp)
-                            .clip(CircleShape)
-                            .background(SurfaceContainerHigh)
-                            .border(3.dp, TerracottaSOS, CircleShape),
-                        contentAlignment = Alignment.Center
-                    ) {
+                    Box(contentAlignment = Alignment.Center) {
                         Icon(
                             imageVector = Icons.Default.Person,
-                            contentDescription = "Mom",
-                            tint = TerracottaSOS,
-                            modifier = Modifier.size(80.dp)
+                            contentDescription = seniorName,
+                            tint = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.size(72.dp)
                         )
                     }
                 }
 
                 Text(
-                    text = "Mom needs help",
-                    style = MaterialTheme.typography.headlineLarge,
-                    color = TextOnSurfacePrimary
+                    text = "$seniorName needs help",
+                    style = MaterialTheme.typography.headlineMedium,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onBackground
                 )
 
                 Text(
-                    text = "Screen seems stuck on Settings\nTapped 1-Tap SOS • Speakerphone Ready",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = TextOnSurfaceVariant,
+                    text = issueReason,
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     textAlign = TextAlign.Center
                 )
 
                 // Remote Telemetry Snapshot
-                Row(
-                    modifier = Modifier
-                        .background(SurfaceContainer, RoundedCornerShape(14.dp))
-                        .padding(horizontal = 16.dp, vertical = 8.dp),
-                    horizontalArrangement = Arrangement.spacedBy(16.dp),
-                    verticalAlignment = Alignment.CenterVertically
+                Surface(
+                    shape = RoundedCornerShape(14.dp),
+                    color = MaterialTheme.colorScheme.surface,
+                    border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outline.copy(alpha = 0.4f))
                 ) {
-                    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-                        Icon(imageVector = Icons.Default.Battery5Bar, contentDescription = null, tint = EmeraldTertiary, modifier = Modifier.size(16.dp))
-                        Text(text = "84%", fontSize = 12.sp, color = TextOnSurfacePrimary)
-                    }
-                    Text(text = "•", color = TextOnSurfaceVariant)
-                    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-                        Icon(imageVector = Icons.Default.Wifi, contentDescription = null, tint = GoldPrimary, modifier = Modifier.size(16.dp))
-                        Text(text = "Home Wi-Fi (5G)", fontSize = 12.sp, color = TextOnSurfacePrimary)
+                    Row(
+                        modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+                        horizontalArrangement = Arrangement.spacedBy(14.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                            Icon(imageVector = Icons.Default.BatteryChargingFull, contentDescription = null, tint = CareGreen, modifier = Modifier.size(18.dp))
+                            Text(text = seniorBattery, fontSize = 13.sp, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onBackground)
+                        }
+                        Text(text = "•", color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                            Icon(imageVector = Icons.Default.Wifi, contentDescription = null, tint = PrimaryBlue, modifier = Modifier.size(18.dp))
+                            Text(text = networkType, fontSize = 13.sp, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onBackground)
+                        }
                     }
                 }
             }
@@ -149,28 +138,29 @@ fun CaregiverIncomingAlertScreen(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(bottom = 32.dp),
+                    .padding(bottom = 28.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 Button(
                     onClick = onAcceptCall,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(60.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = EmeraldTertiary),
-                    shape = RoundedCornerShape(18.dp)
+                        .height(58.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = CareGreen,
+                        contentColor = Color.White
+                    ),
+                    shape = RoundedCornerShape(16.dp)
                 ) {
                     Icon(
                         imageVector = Icons.Default.Call,
                         contentDescription = "Accept",
-                        tint = DeepCanvas,
                         modifier = Modifier.size(24.dp)
                     )
                     Spacer(modifier = Modifier.width(10.dp))
                     Text(
-                        text = "Accept & Open Live Screen",
-                        color = DeepCanvas,
-                        fontSize = 17.sp,
+                        text = "Accept & Open Guidance Canvas",
+                        fontSize = 16.sp,
                         fontWeight = FontWeight.Bold
                     )
                 }
@@ -179,13 +169,13 @@ fun CaregiverIncomingAlertScreen(
                     onClick = onDeclineCall,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(52.dp),
-                    shape = RoundedCornerShape(16.dp),
-                    border = androidx.compose.foundation.BorderStroke(1.dp, OutlineBorder)
+                        .height(50.dp),
+                    shape = RoundedCornerShape(14.dp),
+                    border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outline)
                 ) {
                     Text(
-                        text = "Can't Talk Right Now • Send Quick SMS",
-                        color = TextOnSurfaceVariant,
+                        text = "Decline",
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                         fontSize = 14.sp
                     )
                 }

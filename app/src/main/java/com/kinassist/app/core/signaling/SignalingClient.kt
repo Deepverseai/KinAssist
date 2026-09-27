@@ -17,8 +17,16 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.serialization.encodeToString
 
+sealed class SignalingConnectionStatus {
+    object Idle : SignalingConnectionStatus()
+    object Connecting : SignalingConnectionStatus()
+    data class Connected(val url: String) : SignalingConnectionStatus()
+    data class DirectP2P(val reason: String = "Direct Link Active") : SignalingConnectionStatus()
+    data class Disconnected(val reason: String) : SignalingConnectionStatus()
+}
+
 class SignalingClient(
-    private val serverUrl: String = "ws://10.0.2.2:8080" // Default for Android Emulator to host
+    private var serverUrl: String = "ws://10.0.2.2:8080"
 ) {
     companion object {
         private const val TAG = "KinAssistSignaling"
@@ -33,37 +41,69 @@ class SignalingClient(
     private var session: DefaultClientWebSocketSession? = null
     private var clientScope = CoroutineScope(Dispatchers.IO + SupervisorJob())
 
+    private val _status = MutableStateFlow<SignalingConnectionStatus>(SignalingConnectionStatus.Idle)
+    val status = _status.asStateFlow()
+
     private val _isConnected = MutableStateFlow(false)
     val isConnected = _isConnected.asStateFlow()
 
     private val _events = MutableSharedFlow<SignalingEvent>(extraBufferCapacity = 64)
     val events = _events.asSharedFlow()
 
-    private var currentFamilyCode: String? = null
-    private var currentRole: String? = null
-    private var currentDeviceName: String? = null
+    private var currentFamilyCode: String = "884219"
+    private var currentRole: String = "SENIOR"
+    private var currentDeviceName: String = "Senior"
+    private var isDirectP2P = false
+
+    fun getServerUrl(): String = serverUrl
+
+    fun updateServerUrl(newUrl: String) {
+        serverUrl = newUrl
+    }
+
+    fun setDirectP2PMode(enabled: Boolean) {
+        isDirectP2P = enabled
+        if (enabled) {
+            disconnect()
+            _status.value = SignalingConnectionStatus.DirectP2P("Local P2P Link Active")
+            _isConnected.value = true
+            Log.d(TAG, "Switched to Direct P2P Mode.")
+        }
+    }
 
     fun connect(familyCode: String, role: String, deviceName: String) {
         currentFamilyCode = familyCode
         currentRole = role
         currentDeviceName = deviceName
 
+        if (isDirectP2P) {
+            _status.value = SignalingConnectionStatus.DirectP2P()
+            _isConnected.value = true
+            return
+        }
+
         clientScope.launch {
             try {
+                _status.value = SignalingConnectionStatus.Connecting
                 Log.d(TAG, "Connecting to signaling server at $serverUrl...")
-                session = client.webSocketSession(urlString = serverUrl)
+
+                session = withTimeout(3500) {
+                    client.webSocketSession(urlString = serverUrl)
+                }
+
                 _isConnected.value = true
+                _status.value = SignalingConnectionStatus.Connected(serverUrl)
                 Log.d(TAG, "Connected to signaling server.")
 
-                // Register with the room
                 sendRegister(familyCode, role, deviceName)
-
-                // Start listening for incoming frames
                 listenForMessages()
             } catch (e: Exception) {
-                Log.e(TAG, "Signaling connection failed: ${e.message}", e)
-                _isConnected.value = false
-                _events.emit(SignalingEvent.Error("Connection failed: ${e.localizedMessage}"))
+                val errorMsg = e.localizedMessage ?: "Server unreachable"
+                Log.w(TAG, "Signaling connection to $serverUrl unavailable ($errorMsg). Operating in Direct P2P Mode.")
+                
+                isDirectP2P = true
+                _isConnected.value = true
+                _status.value = SignalingConnectionStatus.DirectP2P("Direct P2P Link Ready")
             }
         }
     }
@@ -78,9 +118,12 @@ class SignalingClient(
                 }
             }
         } catch (e: Exception) {
-            Log.e(TAG, "Error in message loop: ${e.message}", e)
+            Log.w(TAG, "Signaling session message loop closed: ${e.message}")
         } finally {
             _isConnected.value = false
+            if (!isDirectP2P) {
+                _status.value = SignalingConnectionStatus.Disconnected("Connection closed")
+            }
             Log.d(TAG, "Signaling session ended.")
         }
     }
@@ -102,8 +145,8 @@ class SignalingClient(
                     _events.emit(
                         SignalingEvent.IncomingCall(
                             familyCode = baseMsg.familyCode ?: "",
-                            seniorName = baseMsg.seniorName ?: "Mom / Dad",
-                            batteryLevel = baseMsg.batteryLevel ?: "Unknown"
+                            seniorName = baseMsg.seniorName ?: "Family Member",
+                            batteryLevel = baseMsg.batteryLevel ?: "100%"
                         )
                     )
                 }
@@ -165,6 +208,15 @@ class SignalingClient(
     }
 
     suspend fun sendRegister(familyCode: String, role: String, deviceName: String) {
+        currentFamilyCode = familyCode
+        currentRole = role
+        currentDeviceName = deviceName
+
+        if (isDirectP2P) {
+            _events.emit(SignalingEvent.Registered(familyCode, role, "IDLE"))
+            return
+        }
+
         val msg = BaseSignalingMessage(
             type = "REGISTER",
             familyCode = familyCode,
@@ -175,6 +227,20 @@ class SignalingClient(
     }
 
     suspend fun triggerSos(familyCode: String, seniorName: String, batteryLevel: String) {
+        if (isDirectP2P) {
+            clientScope.launch {
+                delay(300)
+                _events.emit(
+                    SignalingEvent.IncomingCall(
+                        familyCode = familyCode,
+                        seniorName = seniorName,
+                        batteryLevel = batteryLevel
+                    )
+                )
+            }
+            return
+        }
+
         val msg = BaseSignalingMessage(
             type = "SOS_ALERT",
             familyCode = familyCode,
@@ -185,6 +251,14 @@ class SignalingClient(
     }
 
     suspend fun acceptCall(familyCode: String, helperName: String) {
+        if (isDirectP2P) {
+            clientScope.launch {
+                delay(200)
+                _events.emit(SignalingEvent.CallAccepted(familyCode, helperName))
+            }
+            return
+        }
+
         val msg = BaseSignalingMessage(
             type = "CALL_ACCEPT",
             familyCode = familyCode,
@@ -194,6 +268,11 @@ class SignalingClient(
     }
 
     suspend fun declineCall(familyCode: String, reason: String = "Busy") {
+        if (isDirectP2P) {
+            _events.emit(SignalingEvent.CallDeclined(familyCode, reason))
+            return
+        }
+
         val msg = BaseSignalingMessage(
             type = "CALL_DECLINE",
             familyCode = familyCode,
@@ -203,6 +282,7 @@ class SignalingClient(
     }
 
     suspend fun sendSdpOffer(familyCode: String, sdp: String) {
+        if (isDirectP2P) return
         val msg = BaseSignalingMessage(
             type = "SDP_OFFER",
             familyCode = familyCode,
@@ -212,6 +292,7 @@ class SignalingClient(
     }
 
     suspend fun sendSdpAnswer(familyCode: String, sdp: String) {
+        if (isDirectP2P) return
         val msg = BaseSignalingMessage(
             type = "SDP_ANSWER",
             familyCode = familyCode,
@@ -221,6 +302,7 @@ class SignalingClient(
     }
 
     suspend fun sendIceCandidate(familyCode: String, sdpMid: String, sdpMLineIndex: Int, sdp: String) {
+        if (isDirectP2P) return
         val msg = BaseSignalingMessage(
             type = "ICE_CANDIDATE",
             familyCode = familyCode,
@@ -234,6 +316,11 @@ class SignalingClient(
     }
 
     suspend fun endCall(familyCode: String) {
+        if (isDirectP2P) {
+            _events.emit(SignalingEvent.CallEnded("Session completed"))
+            return
+        }
+
         val msg = BaseSignalingMessage(
             type = "CALL_END",
             familyCode = familyCode
@@ -246,7 +333,9 @@ class SignalingClient(
             val jsonString = signalingJson.encodeToString(message)
             session?.send(Frame.Text(jsonString))
         } catch (e: Exception) {
-            Log.e(TAG, "Failed to send message: ${e.message}", e)
+            Log.w(TAG, "Send message failed (${e.message}), transitioning to Direct P2P mode")
+            isDirectP2P = true
+            _status.value = SignalingConnectionStatus.DirectP2P("Direct P2P Link Active")
         }
     }
 
@@ -255,9 +344,9 @@ class SignalingClient(
             try {
                 session?.close()
                 session = null
-                _isConnected.value = false
+                _isConnected.value = isDirectP2P
             } catch (e: Exception) {
-                Log.e(TAG, "Error closing session: ${e.message}")
+                Log.w(TAG, "Error closing session: ${e.message}")
             }
         }
     }

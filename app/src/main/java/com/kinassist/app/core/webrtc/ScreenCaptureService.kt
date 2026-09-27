@@ -3,6 +3,7 @@ package com.kinassist.app.core.webrtc
 import android.app.*
 import android.content.Context
 import android.content.Intent
+import android.content.pm.ServiceInfo
 import android.media.projection.MediaProjection
 import android.media.projection.MediaProjectionManager
 import android.os.Build
@@ -37,14 +38,37 @@ class ScreenCaptureService : Service() {
                 val resultData = intent.getParcelableExtra<Intent>(EXTRA_RESULT_DATA)
 
                 if (resultCode == Activity.RESULT_OK && resultData != null) {
-                    startForeground(NOTIFICATION_ID, buildNotification())
-                    val projectionManager = getSystemService(Context.MEDIA_PROJECTION_SERVICE) as MediaProjectionManager
-                    mediaProjection = projectionManager.getMediaProjection(resultCode, resultData)
+                    try {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                            startForeground(NOTIFICATION_ID, buildNotification(), ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PROJECTION)
+                        } else {
+                            startForeground(NOTIFICATION_ID, buildNotification())
+                        }
+                    } catch (e: Exception) {
+                        android.util.Log.e("ScreenCaptureService", "startForeground error: ${e.message}", e)
+                    }
 
-                    // Connect to WebRTC Video and Audio pipeline
-                    val webrtcManager = WebRtcManager.getInstance(applicationContext)
-                    webrtcManager.startScreenCapture(resultData)
-                    webrtcManager.startAudio()
+                    // Start WebRTC screen capture pipeline safely
+                    try {
+                        val webrtcManager = WebRtcManager.getInstance(applicationContext)
+                        webrtcManager.startScreenCapture(resultData)
+                    } catch (e: Throwable) {
+                        android.util.Log.e("ScreenCaptureService", "startScreenCapture error: ${e.message}", e)
+                    }
+
+                    // Start Audio only if RECORD_AUDIO permission is granted
+                    try {
+                        val hasAudioPerm = androidx.core.content.ContextCompat.checkSelfPermission(
+                            this,
+                            android.Manifest.permission.RECORD_AUDIO
+                        ) == android.content.pm.PackageManager.PERMISSION_GRANTED
+
+                        if (hasAudioPerm) {
+                            WebRtcManager.getInstance(applicationContext).startAudio()
+                        }
+                    } catch (e: Throwable) {
+                        android.util.Log.e("ScreenCaptureService", "startAudio error: ${e.message}", e)
+                    }
                 } else {
                     stopSelf()
                 }
@@ -82,7 +106,7 @@ class ScreenCaptureService : Service() {
         )
         return NotificationCompat.Builder(this, CHANNEL_ID)
             .setContentTitle("KinAssist: Screen Sharing Active")
-            .setContentText("Rahul is helping you right now. Tap to return.")
+            .setContentText("Your caregiver is assisting you right now. Tap to return.")
             .setSmallIcon(android.R.drawable.ic_menu_camera)
             .setContentIntent(pendingIntent)
             .setOngoing(true)

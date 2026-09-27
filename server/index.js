@@ -34,9 +34,28 @@ const wss = new WebSocketServer({ server });
  * }
  */
 const rooms = new Map();
+const MAX_ROOMS = 10000;
+const ipConnectionCounts = new Map();
+
+// Rate limiting check
+function checkRateLimit(ip) {
+  const now = Date.now();
+  const record = ipConnectionCounts.get(ip) || { count: 0, resetAt: now + 60000 };
+  if (now > record.resetAt) {
+    record.count = 0;
+    record.resetAt = now + 60000;
+  }
+  record.count++;
+  ipConnectionCounts.set(ip, record);
+  return record.count <= 60; // Max 60 connects/messages per min per IP
+}
 
 function getOrCreateRoom(familyCode) {
   if (!rooms.has(familyCode)) {
+    if (rooms.size >= MAX_ROOMS) {
+      console.warn(`[WARN] Maximum room capacity (${MAX_ROOMS}) reached.`);
+      return null;
+    }
     rooms.set(familyCode, {
       senior: null,
       helpers: new Map(),
@@ -107,6 +126,12 @@ function broadcastToRoom(familyCode, message, excludeWs = null) {
 
 wss.on('connection', (ws, req) => {
   const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+  if (!checkRateLimit(ip)) {
+    console.warn(`[RATE LIMIT] Exceeded from ${ip}`);
+    ws.send(JSON.stringify({ type: 'ERROR', message: 'Rate limit exceeded. Try again later.' }));
+    return ws.close();
+  }
+
   console.log(`[NEW CONNECTION] Client connected from ${ip}`);
 
   ws.isAlive = true;
@@ -116,6 +141,9 @@ wss.on('connection', (ws, req) => {
 
   ws.on('message', (data) => {
     try {
+      if (data.length > 65536) { // 64KB max payload
+        return ws.send(JSON.stringify({ type: 'ERROR', message: 'Payload too large' }));
+      }
       const message = JSON.parse(data.toString());
       handleMessage(ws, message);
     } catch (err) {
@@ -142,10 +170,23 @@ function handleMessage(ws, msg) {
       if (!familyCode || !role) {
         return ws.send(JSON.stringify({ type: 'ERROR', message: 'Missing familyCode or role' }));
       }
-      ws.clientMeta = { familyCode, role, deviceName: deviceName || role };
+      if (familyCode.length > 32) {
+        return ws.send(JSON.stringify({ type: 'ERROR', message: 'Invalid familyCode' }));
+      }
+
       const room = getOrCreateRoom(familyCode);
+      if (!room) {
+        return ws.send(JSON.stringify({ type: 'ERROR', message: 'Server room capacity reached' }));
+      }
+
+      ws.clientMeta = { familyCode, role, deviceName: deviceName || role };
 
       if (role === 'SENIOR') {
+        // If an old senior socket is still connected, gracefully close it
+        if (room.senior?.ws && room.senior.ws !== ws && room.senior.ws.readyState === WebSocket.OPEN) {
+          room.senior.ws.send(JSON.stringify({ type: 'ERROR', message: 'Session replaced by new device' }));
+          room.senior.ws.close();
+        }
         room.senior = { ws, deviceName: ws.clientMeta.deviceName };
         console.log(`[REGISTERED] Senior in room ${familyCode}`);
       } else {
